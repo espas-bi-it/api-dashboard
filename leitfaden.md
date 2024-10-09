@@ -14,12 +14,13 @@ Damit jeder weiss, wie er eigenen Einträge zu unserem Linux Cookbook beitragen 
 ### Repository aufsetzen
 Bevor du starten kannst mit dem Erstellen deiner Einträge, muss zuerst das Repository aufgesetzt werden.
 
-Gehe auf das Repository BBW Linux Cookbook
-Klicke oben rechts auf "Fork" und erstelle deinen Fork
+1. Gehe auf das Repository [API Dashboard](https://github.com/bi-it-elc/api-dashboard)
+2. Klicke oben rechts auf "Fork" und erstelle deinen Fork
+
 Nun hast du das Hauptrepository auf deinen eigenen Account "geforkt" und hast deine eigene Kopie des Linux Cookbook. Im eigenen Fork wird ab jetzt gearbeitet.
 
 ### Eigener Fork auf Desktop clonen
-git clone https://github.com/<username>/bbw-linux-cookbook
+git clone https://github.com/<username>/api-dashboard
 Fork im gewünschten Texteditor öffnen
 Eintrag erstellen
 Um nun zu beginnen mit dem Schreiben deiner Einträge, erstellst du nach simplen Vorschriften deine Dateien.
