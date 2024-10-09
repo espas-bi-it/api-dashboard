@@ -1,11 +1,11 @@
 # 🤝 Leitfaden zum Beitragen
 Damit jeder weiss, wie er eigenen Einträge zu unserem Linux Cookbook beitragen kann, steht hier eine klare Anleitung.
 
-* [Leitfaden zum Beitragen](leitfaden-zum-beitragen.md#leitfaden-zum-beitragen)
-  * [Repository aufsetzen](leitfaden-zum-beitragen.md#repository-aufsetzen)
-  * [Eintrag erstellen](leitfaden-zum-beitragen.md#eintrag-erstellen)
-  * [Eintrag ins Hauptrepository mergen](leitfaden-zum-beitragen.md#eintrag-ins-hauptrepository-mergen)
-  * [Eigener Fork synchronisieren](leitfaden-zum-beitragen.md#eigener-fork-synchronisieren)
+* [Leitfaden zum Beitragen](leitfaden.md#leitfaden-zum-beitragen)
+  * [Repository aufsetzen](leitfaden.md#repository-aufsetzen)
+  * [Eintrag erstellen](leitfaden.md#eintrag-erstellen)
+  * [Eintrag ins Hauptrepository mergen](leitfaden.md#eintrag-ins-hauptrepository-mergen)
+  * [Eigener Fork synchronisieren](leitfaden.md#eigener-fork-synchronisieren)
 
 > ℹ️ Fork = geklontes Repository auf dem eigenen Account
 
