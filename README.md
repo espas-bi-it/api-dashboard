@@ -4,7 +4,7 @@
 
 Dieses Projekt zielt darauf ab, ein **interaktives und benutzerfreundliches Dashboard** mit **C#**, **Blazor**, **Dapper** und **Azure** zu entwickeln. Das Hauptziel besteht darin, relevante Daten zu visualisieren und Funktionen wie Filtern, Sortieren und Suchen zu integrieren, um die Benutzererfahrung zu optimieren.
 
-#### Hauptkomponenten:
+### Hauptkomponenten:
 - **RESTful API-Entwicklung:** Implementiert mit **ASP.NET Core Web API** in **C#**, mit Datenpersistenz in einer **MariaDB**-Datenbank.
 - **Datenzugriff:** Verwendung von **Dapper** als Micro-ORM für effizienten Datenbankzugriff.
 - **Frontend-Entwicklung:** Nutzung von **Blazor** zur Erstellung einer responsiven und intuitiven Benutzeroberfläche.
