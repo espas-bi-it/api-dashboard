@@ -3,16 +3,17 @@
 ## **Inhaltsverzeichnis**
 1. [Projektbeschreibung](#projektbeschreibung)
 2. [Technologie-Stack](#technologie-stack)
-3. [Projektstruktur](#projektstruktur)
-4. [API-Entwicklung](#api-entwicklung)
+3. [Projektkonfiguration](#projektkonfiguration) 
+4. [Projektstruktur](#projektstruktur)
+5. [API-Entwicklung](#api-entwicklung)
     - [API-Endpunkte](#api-endpunkte)
-5. [Frontend-Entwicklung](#frontend-entwicklung)
+6. [Frontend-Entwicklung](#frontend-entwicklung)
     - [Datenvisualisierung](#datenvisualisierung)
-6. [Datenbank und Dapper-Integration](#datenbank-und-dapper-integration)
-7. [Docker-Containerisierung](#docker-containerisierung)
-8. [Deployment auf Azure](#deployment-auf-azure)
-9. [Tests und Qualitätssicherung](#tests-und-qualitätssicherung)
-10. [Installationsanleitung](#installationsanleitung)
+7. [Datenbank und Dapper-Integration](#datenbank-und-dapper-integration)
+8. [Docker-Containerisierung](#docker-containerisierung)
+9. [Deployment auf Azure](#deployment-auf-azure)
+10. [Tests und Qualitätssicherung](#tests-und-qualitätssicherung)
+11. [Installationsanleitung](#installationsanleitung)
 
 ---
 
@@ -39,32 +40,54 @@ Das Dashboard besteht aus mehreren Komponenten:
 - **Cloud**: Microsoft Azure
 - **Testing-Frameworks**: xUnit, NUnit
 
-## **3. Projektstruktur** <a name="projektstruktur"></a>
+## **3. Projektkonfiguration** <a name="projektkonfiguration"></a>  
+
+Das Projekt ist konfiguriert mit:
+- **ASP.NET Core Web API**
+- **Framework**: .NET 8.0 (langfristiger Support)
+- **Authentifizierung**: Kein Authentifizierungstyp konfiguriert
+- **HTTPS**: Für HTTPS konfiguriert
+- **OpenAPI-Unterstützung**: Aktiviert
+- **Controller**: Verwendung von Controllern zur Handhabung von API-Anfragen
+
+## **4. Projektstruktur** <a name="projektstruktur"></a>
 
 ```plaintext
-/DeinProjektName
+/ApiDashboard
 │
-├── /Backend             -> API (ASP.NET Core)
-│   ├── Controllers      -> API-Controller
-│   ├── Models           -> Datenmodelle
-│   ├── Services         -> Business-Logik
-│   └── Data             -> Dapper-Implementierung für Datenbankzugriffe
+├── /.git                -> Git-Verzeichnis
+├── /.github             -> GitHub-spezifische Dateien
+├── /.vs                 -> Visual Studio-spezifische Dateien
 │
-├── /Frontend            -> UI (Blazor)
-│   ├── Components       -> Blazor-Komponenten
-│   └── wwwroot          -> Statische Dateien (CSS, JS, Bilder)
+├── /ApiDashboard        -> Backend (ASP.NET Core)
+│   ├── /bin             -> Kompilierte Ausgaben
+│   ├── /Controllers     -> API-Controller
+│   ├── /obj             -> Zwischenablage für Kompilierung
+│   ├── /Properties      -> Projekteigenschaften
+│   ├── ApiDasboad.csproj-> Projektdatei für das Backend
+│   ├── ApiDasboard-csproj.use-> Weitere Projektdatei
+│   ├── ApiDashboard.http-> HTTP-Requests für Tests
+│   ├── appsettings.Development.json-> Entwicklungs-Konfiguration
+│   ├── appsettings.json -> Allgemeine Konfiguration
+│   ├── Program.cs       -> Einstiegspunkt der Anwendung
+│   └── WeatherForecast.cs-> Beispiel-Model für Wetterdaten
+│
+├── /Backend             -> (kann leer sein oder für zusätzliche Backend-Komponenten verwendet werden)
 │
 ├── /Database            -> Datenbank (MariaDB)
-│   └── Migrations       -> Datenbankschemata und Migrationen
 │
 ├── /Docker              -> Docker-Konfigurationsdateien
-│   ├── Dockerfile-API   -> Dockerfile für die API
-│   └── Dockerfile-UI    -> Dockerfile für das Frontend
 │
-└── /Docs                -> Dokumentationen und ReadMe-Dateien
+├── /Docs                -> Dokumentationen und ReadMe-Dateien
+│   └── dokumentation.md -> Projektdokumentation
+│
+├── /Frontend            -> UI (Blazor)
+│
+├── ApiDashboard.sln     -> Visual Studio-Lösung
+├── LICENSE              -> Lizenzdatei
 ```
 
-## **4. API-Entwicklung** <a name="api-entwicklung"></a>
+## **5. API-Entwicklung** <a name="api-entwicklung"></a>
 
 Die API wurde unter Verwendung von **ASP.NET Core Web API** erstellt und befolgt die REST-Prinzipien. Sie dient dazu, Daten von externen APIs abzurufen, zu verarbeiten und in der MariaDB-Datenbank zu speichern.
 
@@ -76,7 +99,7 @@ Die API wurde unter Verwendung von **ASP.NET Core Web API** erstellt und befolgt
 - **PUT /api/data/{id}**: Aktualisiert bestehende Daten in der Datenbank.
 - **DELETE /api/data/{id}**: Löscht einen Datensatz basierend auf der ID.
 
-## **5. Frontend-Entwicklung** <a name="frontend-entwicklung"></a>
+## **6. Frontend-Entwicklung** <a name="frontend-entwicklung"></a>
 
 Das Frontend wurde mit **Blazor** entwickelt, um eine interaktive Benutzeroberfläche zu bieten, die in Echtzeit Daten anzeigt. Die wichtigsten Komponenten beinhalten:
 
@@ -89,14 +112,14 @@ Das Frontend wurde mit **Blazor** entwickelt, um eine interaktive Benutzeroberfl
 - **Bibliothek**: Für die Diagramme wird eine JavaScript-basierte Visualisierungsbibliothek verwendet, die in Blazor integriert ist.
 - **Diagrammtypen**: Linien-, Balken-, Kreisdiagramme und andere grafische Darstellungen zur Anzeige von KPIs und Trends.
 
-## **6. Datenbank und Dapper-Integration** <a name="datenbank-und-dapper-integration"></a>
+## **7. Datenbank und Dapper-Integration** <a name="datenbank-und-dapper-integration"></a>
 
 Die **MariaDB**-Datenbank speichert alle relevanten Daten, die über die API abgerufen werden. Für den Zugriff auf die Datenbank wird **Dapper** verwendet, ein leichtes ORM für schnelle und effiziente Abfragen.
 
 - **Verbindung zur Datenbank**: Die API verbindet sich zur MariaDB-Datenbank mittels einer Verbindungsschicht, die mit Dapper erstellt wurde.
 - **Datenabfragen**: CRUD-Operationen werden durch Dapper ausgeführt, um Daten effizient zu speichern, abzurufen und zu aktualisieren.
 
-## **7. Docker-Containerisierung** <a name="docker-containerisierung"></a>
+## **8. Docker-Containerisierung** <a name="docker-containerisierung"></a>
 
 Sowohl das Backend als auch das Frontend werden in **Docker-Containern** ausgeführt, was die Bereitstellung und Skalierung der Anwendung vereinfacht.
 
@@ -109,7 +132,7 @@ Sowohl das Backend als auch das Frontend werden in **Docker-Containern** ausgef�
 ### **Docker Compose**:
 - Eine `docker-compose.yml`-Datei wird verwendet, um die verschiedenen Services (API, UI und Datenbank) zu orchestrieren.
 
-## **8. Deployment auf Azure** <a name="deployment-auf-azure"></a>
+## **9. Deployment auf Azure** <a name="deployment-auf-azure"></a>
 
 Das Projekt wird auf **Microsoft Azure** bereitgestellt. Die Docker-Container werden auf **Azure Container Instances** oder **Azure Kubernetes Service (AKS)** gehostet.
 
@@ -118,7 +141,7 @@ Das Projekt wird auf **Microsoft Azure** bereitgestellt. Die Docker-Container we
   - Container auf Azure-Instanzen bereitstellen.
   - Sicherstellen, dass das Dashboard öffentlich zugänglich und sicher ist.
 
-## **9. Tests und Qualitätssicherung** <a name="tests-und-qualitätssicherung"></a>
+## **10. Tests und Qualitätssicherung** <a name="tests-und-qualitätssicherung"></a>
 
 Die Anwendung wird durch Unit- und Integrationstests abgesichert:
 
@@ -126,7 +149,7 @@ Die Anwendung wird durch Unit- und Integrationstests abgesichert:
 - **Integrationstests**: Testen der Interaktion zwischen API und Datenbank sowie zwischen API und externen Diensten.
 - **UI-Tests**: Sicherstellen, dass die Benutzeroberfläche korrekt funktioniert und auf verschiedenen Geräten responsive ist.
 
-## **10. Installationsanleitung** <a name="installationsanleitung"></a>
+## **11. Installationsanleitung** <a name="installationsanleitung"></a>
 
 ### **Voraussetzungen**:
 - **.NET SDK** (mindestens .NET 5.0)
