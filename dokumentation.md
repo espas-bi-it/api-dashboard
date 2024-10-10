@@ -62,6 +62,8 @@ Das Dashboard besteht aus mehreren Komponenten:
 │   └── Dockerfile-UI    -> Dockerfile für das Frontend
 │
 └── /Docs                -> Dokumentationen und ReadMe-Dateien
+```
+
 ## **4. API-Entwicklung** <a name="api-entwicklung"></a>
 
 Die API wurde unter Verwendung von **ASP.NET Core Web API** erstellt und befolgt die REST-Prinzipien. Sie dient dazu, Daten von externen APIs abzurufen, zu verarbeiten und in der MariaDB-Datenbank zu speichern.
