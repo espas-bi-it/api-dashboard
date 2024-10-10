@@ -59,3 +59,67 @@ Wenn jeder seine Änderungen zum Hauptrepository beiträgt, kann es schnell pass
 > ℹ️ Aufpassen, nur synchronisieren wenn alle Änderungen schon im Hauptrepository sind. Ansonsten können diese möglicherweise gelöscht/überschrieben werden.
 
 _Bei Fragen/Problemen, einen Lead anschreiben._
+
+
+
+
+# 🤝 Contribution Guide
+To ensure everyone knows how to contribute entries to our Linux Cookbook, here is a clear guide.
+
+* [Contribution Guide](leitfaden.md#contribution-guide)
+  * [Setting up the Repository](leitfaden.md#setting-up-the-repository)
+  * [Creating an Entry](leitfaden.md#creating-an-entry)
+  * [Merging the Entry into the Main Repository](leitfaden.md#merging-the-entry-into-the-main-repository)
+  * [Syncing Your Fork](leitfaden.md#syncing-your-fork)
+
+> ℹ️ Fork = a cloned repository on your own account
+
+📝 [**Markdown Cheatsheet**](https://www.markdownguide.org/cheat-sheet/)
+
+### Setting up the Repository
+Before you can start creating your entries, you must first set up the repository.
+
+1. Go to the repository [API Dashboard](https://github.com/bi-it-elc/api-dashboard)
+2. Click on "Fork" in the top right to create your fork
+
+Now you have "forked" the main repository to your own account, and you have your own copy of the Linux Cookbook. You will work in your own fork from now on.
+
+3. Clone your fork to your desktop:
+
+```sh
+git clone https://github.com/<username>/api-dashboard
+```
+
+4. Open the fork in your preferred text editor.
+
+## Creating an Entry
+To start writing your entries, follow these simple rules to create your files.
+
+1. Create a new file with the name in kebab-case and the extension `.md`. _Example: `permission-system.md`_
+
+   > ℹ️ The first title (Heading 1) in the file will also be used as the page title.
+
+2. If the entry belongs to a subtopic, move it to the respective folder.
+3. Add the link to your newly created entry in the correct place in the `SUMMARY.md`.
+
+## Merging the Entry into the Main Repository
+After finishing your entry, it needs to be merged into the main repository. Follow these steps to ensure a smooth process.
+
+1. Commit all changes in your fork.
+2. Go to the page of your fork.
+3. Click on the "Contribute" dropdown.
+4. Click on "Open pull request."
+5. Briefly describe your changes, if necessary.
+6. Wait for your pull request to be reviewed by the leads and possibly revised.
+
+After your entry is accepted, the process starts again. Don't forget to [sync your fork](leitfaden.md#syncing-your-fork).
+
+## Syncing Your Fork
+When everyone contributes to the main repository, your fork may quickly become outdated. That's why it must be regularly synchronized.
+
+1. Go to the page of your fork.
+2. Click on the "Sync fork" dropdown and confirm the synchronization.
+
+   > ℹ️ Be careful to sync only when all your changes have already been merged into the main repository. Otherwise, they might be overwritten or deleted.
+
+_If you have questions or run into problems, contact a lead._
