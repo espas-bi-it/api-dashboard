@@ -61,6 +61,7 @@ Wenn jeder seine Änderungen zum Hauptrepository beiträgt, kann es schnell pass
 _Bei Fragen/Problemen, einen Lead anschreiben._
 
 
+---
 
 
 # 🤝 Contribution Guide
