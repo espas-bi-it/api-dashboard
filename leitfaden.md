@@ -1,9 +1,9 @@
 # 🤝 Leitfaden zum Beitragen
-Damit jeder weiss, wie er eigenen Einträge zu unserem Linux Cookbook beitragen kann, steht hier eine klare Anleitung.
+Damit jeder weiss, wie er eigenen Einträge zum Dashboard Pojekt beitragen kann, steht hier eine klare Anleitung.
 
 * [Leitfaden zum Beitragen](leitfaden.md#leitfaden-zum-beitragen)
   * [Repository aufsetzen](leitfaden.md#repository-aufsetzen)
-  * [Eintrag erstellen](leitfaden.md#eintrag-erstellen)
+  * [Eintrag erstellen](leitfaden.md#beitragen)
   * [Eintrag ins Hauptrepository mergen](leitfaden.md#eintrag-ins-hauptrepository-mergen)
   * [Eigener Fork synchronisieren](leitfaden.md#eigener-fork-synchronisieren)
 
@@ -17,7 +17,7 @@ Bevor du starten kannst mit dem Erstellen deiner Einträge, muss zuerst das Repo
 1. Gehe auf das Repository [API Dashboard](https://github.com/bi-it-elc/api-dashboard)
 2. Klicke oben rechts auf "Fork" und erstelle deinen Fork
 
-Nun hast du das Hauptrepository auf deinen eigenen Account "geforkt" und hast deine eigene Kopie des Linux Cookbook. Im eigenen Fork wird ab jetzt gearbeitet.
+Nun hast du das Hauptrepository auf deinen eigenen Account "geforkt" und hast deine eigene Kopie des Dasbboard Projektes. Im eigenen Fork wird ab jetzt gearbeitet.
 
 3. Eigener Fork auf Desktop clonen
 
@@ -27,15 +27,13 @@ git clone https://github.com/<username>/api-dashboard
 
 4. Fork im gewünschten Texteditor öffnen
    
-## Eintrag erstellen
-Um nun zu beginnen mit dem Schreiben deiner Einträge, erstellst du nach simplen Vorschriften deine Dateien.
+## Beitragen
+Jeder kann zum Projekt beitragen, indem er es forkt, cloned und daran arbeitet. Um nun zu beginnen mit dem Schreiben deiner Einträge, erstellst du nach simplen Vorschriften deine Dateien.
 
-1. Neue Datei erstellen mit dem Namen in kebab-case und der Endung auf `.md`. _Beispiel: `permission-system.md`_
-   
-> ℹ️ Der erste Titel (Heading 1) in der Datei wird auch als Seitentitel verwendet.
-
+1. Neue Datei erstellen mit dem Namen in kebab-case.
 2. Falls der Eintrag in ein Unterthema gehört, dann in den jeweiligen Ordner verschieben.
 3. Der Link zu deinem erstellten Eintrag an richtiger Stelle in das SUMMARY.md schreiben.
+4. Jede Änderung sollte dokumentiert werden und in die [dokumentation.md](https://github.com/bi-it-elc/api-dashboard/Docs/dokumentation.md) hinzugefügt werden.
    
 ## Eintrag ins Hauptrepository mergen
 
@@ -69,7 +67,7 @@ To ensure everyone knows how to contribute entries to our Linux Cookbook, here i
 
 * [Contribution Guide](leitfaden.md#contribution-guide)
   * [Setting up the Repository](leitfaden.md#setting-up-the-repository)
-  * [Creating an Entry](leitfaden.md#creating-an-entry)
+  * [Creating an Entry](leitfaden.md#contributing)
   * [Merging the Entry into the Main Repository](leitfaden.md#merging-the-entry-into-the-main-repository)
   * [Syncing Your Fork](leitfaden.md#syncing-your-fork)
 
@@ -93,15 +91,13 @@ git clone https://github.com/<username>/api-dashboard
 
 4. Open the fork in your preferred text editor.
 
-## Creating an Entry
-To start writing your entries, follow these simple rules to create your files.
+## **Contributing**
+Anyone can contribute to the project by forking, cloning, and working on it. To start writing your entries, follow these simple guidelines to create your files.
 
-1. Create a new file with the name in kebab-case and the extension `.md`. _Example: `permission-system.md`_
-
-   > ℹ️ The first title (Heading 1) in the file will also be used as the page title.
-
-2. If the entry belongs to a subtopic, move it to the respective folder.
-3. Add the link to your newly created entry in the correct place in the `SUMMARY.md`.
+1. Create a new file with a name in kebab-case.
+2. If the entry belongs to a subtopic, move it to the appropriate folder.
+3. Write the link to your created entry in the correct place in the `SUMMARY.md`.
+4. Every change should be documented and added to the [Dokumentation](https://github.com/bi-it-elc/api-dashboard/Docs/dokumentation.md).
 
 ## Merging the Entry into the Main Repository
 After finishing your entry, it needs to be merged into the main repository. Follow these steps to ensure a smooth process.
