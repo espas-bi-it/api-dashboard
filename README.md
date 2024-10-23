@@ -27,11 +27,11 @@ Dieses Projekt zielt darauf ab, ein **interaktives und benutzerfreundliches Dash
 
 ### So kannst du beitragen
 
-Beiträge zu diesem Projekt sind willkommen! Bitte schaue dir unseren [🤝 Leitfaden zum Beitragen](https://github.com/bi-it-elc/api-dashboard/blob/main/leitfaden.md) an, um zu erfahren, wie du loslegen kannst. Solltest du auf Probleme stoßen oder Vorschläge haben, eröffne bitte eine Pull-Request oder ein Issue.
+Beiträge zu diesem Projekt sind willkommen! Bitte schaue dir unseren [🤝 Leitfaden zum Beitragen](https://github.com/espas-bi-it/api-dashboard/blob/main/leitfaden.md) an, um zu erfahren, wie du loslegen kannst. Solltest du auf Probleme stoßen oder Vorschläge haben, eröffne bitte eine Pull-Request oder ein Issue.
 
 ### Dokumentation
 
-Eine vollständige Dokumentation, inklusive Installationsanleitungen, Benutzerhandbüchern und technischen Spezifikationen, wird bereitgestellt. Dazu gehören auch Anweisungen zur Containerisierung und Bereitstellung auf Azure.
+Eine vollständige [Dokumentation](https://github.com/espas-bi-it/api-dashboard/blob/main/Docs/dokumentation.md), inklusive Installationsanleitungen, Benutzerhandbüchern und technischen Spezifikationen, wird bereitgestellt. Dazu gehören auch Anweisungen zur Containerisierung und Bereitstellung auf Azure.
 
 ### Feedback
 
@@ -67,11 +67,11 @@ This project aims to develop an **interactive and user-friendly dashboard** usin
 
 ### How to Contribute
 
-Contributions to this project are welcome! Please check out our [🤝 Contribution Guide](#) to get started. If you encounter any issues or have suggestions, feel free to open a Pull Request or an Issue.
+Contributions to this project are welcome! Please check out our [🤝 Contribution Guide](https://github.com/espas-bi-it/api-dashboard/blob/main/leitfaden.md) to get started. If you encounter any issues or have suggestions, feel free to open a Pull Request or an Issue.
 
 ### Documentation
 
-A complete documentation, including installation guides, user manuals, and technical specifications, will be provided. Instructions on containerization and deployment to Azure are also included.
+A complete [documentation](https://github.com/espas-bi-it/api-dashboard/blob/main/Docs/dokumentation.md), including installation guides, user manuals, and technical specifications, will be provided. Instructions on containerization and deployment to Azure are also included.
 
 ### Feedback
 
