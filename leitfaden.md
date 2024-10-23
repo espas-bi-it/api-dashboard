@@ -33,7 +33,7 @@ Jeder kann zum Projekt beitragen, indem er es forkt, cloned und daran arbeitet. 
 1. Neue Datei erstellen mit dem Namen in kebab-case.
 2. Falls der Eintrag in ein Unterthema gehört, dann in den jeweiligen Ordner verschieben.
 3. Der Link zu deinem erstellten Eintrag an richtiger Stelle in das SUMMARY.md schreiben.
-4. Jede Änderung sollte dokumentiert werden und in die [dokumentation.md](https://github.com/bi-it-elc/api-dashboard/Docs/dokumentation.md) hinzugefügt werden.
+4. Jede Änderung sollte dokumentiert werden und in die [dokumentation](https://github.com/espas-bi-it/api-dashboard/blob/main/Docs/dokumentation.md) hinzugefügt werden.
    
 ## Eintrag ins Hauptrepository mergen
 
@@ -97,7 +97,7 @@ Anyone can contribute to the project by forking, cloning, and working on it. To 
 1. Create a new file with a name in kebab-case.
 2. If the entry belongs to a subtopic, move it to the appropriate folder.
 3. Write the link to your created entry in the correct place in the `SUMMARY.md`.
-4. Every change should be documented and added to the [Dokumentation](https://github.com/bi-it-elc/api-dashboard/Docs/dokumentation.md).
+4. Every change should be documented and added to the [Documentation](https://github.com/espas-bi-it/api-dashboard/blob/main/Docs/dokumentation.md).
 
 ## Merging the Entry into the Main Repository
 After finishing your entry, it needs to be merged into the main repository. Follow these steps to ensure a smooth process.
