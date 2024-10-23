@@ -14,7 +14,7 @@ Damit jeder weiss, wie er eigenen Einträge zum Dashboard Pojekt beitragen kann,
 ### Repository aufsetzen
 Bevor du starten kannst mit dem Erstellen deiner Einträge, muss zuerst das Repository aufgesetzt werden.
 
-1. Gehe auf das Repository [API Dashboard](https://github.com/bi-it-elc/api-dashboard)
+1. Gehe auf das Repository [API Dashboard](https://github.com/espas-bi-it/api-dashboard)
 2. Klicke oben rechts auf "Fork" und erstelle deinen Fork
 
 Nun hast du das Hauptrepository auf deinen eigenen Account "geforkt" und hast deine eigene Kopie des Dasbboard Projektes. Im eigenen Fork wird ab jetzt gearbeitet.
