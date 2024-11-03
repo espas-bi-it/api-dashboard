@@ -1,4 +1,7 @@
-﻿namespace DashboardProject
+﻿using DataAccess.Data;
+using DataAccess.Models;
+
+namespace ApiDashboard
 {
     public static class Api
     {

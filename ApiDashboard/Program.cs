@@ -1,5 +1,6 @@
-using DataAccess.DBAccess;
-using DashboardProject;
+ï»¿using DataAccess.DBAccess;
+using ApiDashboard;
+using DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,12 +34,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.ConfigureApi(); // Falls diese Middleware Authentifizierung oder andere wichtige Aufgaben übernimmt
+app.ConfigureApi(); // Falls diese Middleware Authentifizierung oder andere wichtige Aufgaben ï¿½bernimmt
 
 // Map Razor Pages and MVC Controllers
 app.MapRazorPages();
 app.MapControllers();
 
 app.Run();
-
-

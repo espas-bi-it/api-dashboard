@@ -1,4 +1,4 @@
-namespace ApiDashboard
+﻿namespace ApiDashboard
 {
     public class WeatherForecast
     {
