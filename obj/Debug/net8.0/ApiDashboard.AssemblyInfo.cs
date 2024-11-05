@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiDashboard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d8de6cc75cec60acc947d4f0620753730230169")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8890a1fa08bb2e49cc775f41ef4afb0db0e68f28")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiDashboard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiDashboard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

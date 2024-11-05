@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\swill\\Source\\Repos\\api-dashboard\\ApiDashboard.csproj": {}
+    "C:\\Users\\swill\\source\\repos\\api-dashboard\\ApiDashboard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\swill\\Source\\Repos\\api-dashboard\\ApiDashboard.csproj": {
+    "C:\\Users\\swill\\source\\repos\\api-dashboard\\ApiDashboard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\swill\\Source\\Repos\\api-dashboard\\ApiDashboard.csproj",
+        "projectUniqueName": "C:\\Users\\swill\\source\\repos\\api-dashboard\\ApiDashboard.csproj",
         "projectName": "ApiDashboard",
-        "projectPath": "C:\\Users\\swill\\Source\\Repos\\api-dashboard\\ApiDashboard.csproj",
+        "projectPath": "C:\\Users\\swill\\source\\repos\\api-dashboard\\ApiDashboard.csproj",
         "packagesPath": "C:\\Users\\swill\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\swill\\Source\\Repos\\api-dashboard\\obj\\",
+        "outputPath": "C:\\Users\\swill\\source\\repos\\api-dashboard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
