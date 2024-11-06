@@ -1,6 +1,6 @@
 ﻿# 1. Allgemeine Informationen
 
-## **1. Projekte**
+## **1. Projekte** 
 
 In der **ApiDashboard Solution** existieren folgende **eigenständige Projekte**, welche
 miteinander verknüft sind.
