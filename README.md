@@ -27,7 +27,7 @@ Dieses Projekt zielt darauf ab, ein **interaktives und benutzerfreundliches Dash
 
 ### So kannst du beitragen
 
-Beiträge zu diesem Projekt sind willkommen! Bitte schaue dir unseren [🤝 Leitfaden zum Beitragen](https://github.com/espas-bi-it/api-dashboard/blob/main/leitfaden.md) an, um zu erfahren, wie du loslegen kannst. Solltest du auf Probleme stoßen oder Vorschläge haben, eröffne bitte eine Pull-Request oder ein Issue.
+Beiträge zu diesem Projekt sind willkommen! Bitte schaue dir unseren [🤝 Leitfaden zum Beitragen](https://github.com/espas-bi-it/api-dashboard/blob/main/Docs/leitfaden.md) an, um zu erfahren, wie du loslegen kannst. Solltest du auf Probleme stoßen oder Vorschläge haben, eröffne bitte eine Pull-Request oder ein Issue.
 
 ### Dokumentation
 
