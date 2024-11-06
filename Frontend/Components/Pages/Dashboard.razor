@@ -1,0 +1,260 @@
+﻿@page "/dashboard"
+@rendermode InteractiveServer
+
+<PageTitle>ESPAS Dashboard</PageTitle>
+
+
+
+<main class="">
+
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Earnings (Monthly)
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Earnings (Annual)
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Tasks
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Pending Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-3 pt-4">
+        <!-- Line Chart-->
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Line</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                                <span data-feather="calendar"></span>
+                                Filter
+                            </button>
+                        </div>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
+                                <div class="c-chart-wrapper">
+                                    <SfChart Title="Sales Analysis">
+                                        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
+                                        <ChartPrimaryYAxis Title="Sales in Dollar"></ChartPrimaryYAxis>
+                                        <ChartSeriesCollection>
+                                            <ChartSeries DataSource="@Sales" XName="Month" YName="SalesValue" Type="ChartSeriesType.Column">
+                                                <ChartMarker>
+                                                    <ChartDataLabel Visible="true"></ChartDataLabel>
+                                                </ChartMarker>
+                                            </ChartSeries>
+                                        </ChartSeriesCollection>
+                                    </SfChart>
+
+                                    @code {
+                                        public class SalesInfo
+                                        {
+                                            public string Month { get; set; }
+                                            public double SalesValue { get; set; }
+                                        }
+
+                                        public List<SalesInfo> Sales = new List<SalesInfo>
+                                    {
+                                    new SalesInfo { Month = "Jan", SalesValue = 20 },
+                                    new SalesInfo { Month = "Feb", SalesValue = 20 },
+                                    new SalesInfo { Month = "Mar", SalesValue = 20 },
+                                    new SalesInfo { Month = "Apr", SalesValue = 20 },
+                                    new SalesInfo { Month = "May", SalesValue = 40 },
+                                    new SalesInfo { Month = "Jun", SalesValue = 32 },
+                                    new SalesInfo { Month = "Jul", SalesValue = 35 }
+                                    };
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Bar Chart-->
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Bar</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                                <span data-feather="calendar"></span>
+                                Filter
+                            </button>
+                        </div>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
+                                <div class="c-chart-wrapper">
+                                    <SfChart Title="Sales Analysis">
+                                        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
+                                        <ChartPrimaryYAxis Title="Sales in Dollar"></ChartPrimaryYAxis>
+                                        <ChartSeriesCollection>
+                                            <ChartSeries DataSource="@SalesBar" XName="Month" YName="SalesValue" Type="ChartSeriesType.Bar">
+                                                <ChartMarker>
+                                                    <ChartDataLabel Visible="true"></ChartDataLabel>
+                                                </ChartMarker>
+                                            </ChartSeries>
+                                        </ChartSeriesCollection>
+                                    </SfChart>
+
+                                    @code {
+                                        public List<SalesInfo> SalesBar = new List<SalesInfo>
+                                    {
+                                    new SalesInfo { Month = "Jan", SalesValue = 35 },
+                                    new SalesInfo { Month = "Feb", SalesValue = 28 },
+                                    new SalesInfo { Month = "Mar", SalesValue = 34 },
+                                    new SalesInfo { Month = "Apr", SalesValue = 32 },
+                                    new SalesInfo { Month = "May", SalesValue = 40 },
+                                    new SalesInfo { Month = "Jun", SalesValue = 32 },
+                                    new SalesInfo { Month = "Jul", SalesValue = 35 }
+                                    };
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bar Chart 2-->
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Bar</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                                <span data-feather="calendar"></span>
+                                Filter
+                            </button>
+                        </div>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
+                                <div class="c-chart-wrapper">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      
+
+     
+    </div>
+
+
+
+
+</main>
+
+

@@ -31,7 +31,7 @@ miteinander verknüft sind.
 
 ## Connection String anpassen
 
-In `appsettings.json` : Replace the Connection String
+In `appsettings.json` -> Replace the Connection String
 
 Example:
 
