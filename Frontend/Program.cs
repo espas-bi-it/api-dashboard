@@ -2,6 +2,7 @@
 using Frontend;
 using Frontend.Components;
 using Syncfusion.Blazor;
+using DataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddSyncfusionBlazor();
 builder.Services.AddMemoryCache();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+// Add Dapper service
+builder.Services.AddTransient<UserService>();
 
 var app = builder.Build();
 //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
