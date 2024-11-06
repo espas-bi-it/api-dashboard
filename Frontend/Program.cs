@@ -11,6 +11,8 @@ builder.Services.AddSignalR(o => { o.MaximumReceiveMessageSize = 102400000; });
 builder.Services.AddSyncfusionBlazor();
             builder.Services.AddSingleton<PdfService>();
 builder.Services.AddMemoryCache();
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
