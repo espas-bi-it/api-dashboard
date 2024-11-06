@@ -94,3 +94,38 @@ main {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+/* CUSTOM STYLES*/
+
+.form-control {
+    padding: 0.75rem .75rem;
+}
+
+/* ESPAS Balken */
+#es-balken-2, #es-balken-3, #es-balken-4, #es-balken-5 {
+    height: 20px;
+}
+
+#es-balken-2, #es-balken-3, #es-balken-4 {
+    transform: skew(-7deg) translate(10px,0);
+}
+
+#es-balken-1, #es-balken-2 {
+    background-color: rgb(140, 170, 220);
+}
+
+#es-balken-3 {
+    background-color: rgb(135, 200, 90);
+}
+
+#es-balken-4, #es-balken-5 {
+    background-color: rgb(230, 190, 110);
+}
+
+#es-balken-4, #es-balken-5 {
+    background-color: rgb(230, 190, 110);
+}
+
+#es-balken-1, #es-balken-2, #es-balken-3, #es-balken-4 {
+    z-index: 200;
+}

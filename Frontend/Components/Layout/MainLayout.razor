@@ -6,12 +6,26 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-        <a href="https://www.syncfusion.com/blazor-components/" target="_blank">Blazor Components</a>
-        <a href="https://blazor.syncfusion.com/documentation/" target="_blank">User Guide</a>
-        <a href="http://blazor.syncfusion.com/" target="_blank">View Demos</a> 
-        </div>
 
+        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+           
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+            <div class="navbar-nav">
+                <div class="nav-item text-nowrap">
+                    <a class="nav-link px-3" href="#">Sign out</a>
+                </div>
+            </div>
+        </header>
+        <div id="es-balken-1" class="d-flex flex-row" style="position: relative;">
+            <div id="es-balken-2" style="flex-grow: 2;"></div>
+            <div id="es-balken-3" style="flex-grow: 2;"></div>
+            <div id="es-balken-4" style="flex-grow: 1;"></div>
+            <div id="es-balken-5" style="flex-grow: 1;"></div>
+        </div>
+      
         <article class="content px-4">
             @Body
         </article>
