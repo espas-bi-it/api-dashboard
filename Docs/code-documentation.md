@@ -1,73 +1,35 @@
-﻿# **Code-Documentation**
+﻿# 1. Allgemeine Informationen
 
-## 1. Installation
+## **Projekte**
 
-### Nuget Packages
-This project requires the following NuGet packages:
-```sh
-dotnet add package Dapper --version 2.1.35
-dotnet add package Microsoft.AspNetCore.OpenApi --version 8.0.10
-dotnet add package Newtonsoft.Json --version 13.0.3
-dotnet add package Swashbuckle.AspNetCore --version 6.9.0
-dotnet add package System.Data.SqlClient --version 4.8.6
-```
+In der **ApiDashboard Solution** existieren folgende **eigenständige Projekte**, welche
+miteinander verknüft sind.
 
-## 2. Map Razor Pages and MVC Controllers
+| Projektname        | Projekttyp                                                       | Stichworte                         |
+|:-------------------|:----------------------------------------------------------------|:------------------------------------|
+| APIDashboard       | ASP.NET Core Web API                                             | Backend, RestfulAPI, Swagger       |
+| DataAccess         | Class Library                                                    | Backend, Dapper                    |
+| Database           | SQL-Server Projekt                                               | Backend, SQL, Dapper               |
+| Frontend           | Syncfusion Blazor Template Studio (Blazor Render mode: Server)   | Frontend, Blazor Server-Application|
 
-### Adjust Project Structure
-
-Create a new folder named Pages in the root directory of your project.
-```c#
-// Map Razor Pages and MVC Controllers
-app.MapRazorPages();
-app.MapControllers();
-```
-
-### Configurate Views with Razor Pages
-
-1. **Add Razor Pages:** Add a new Razor Page by creating a .cshtml file in the Pages folder, e.g., `index.cshtml`
-2. **Create a new Folder named** `Shared` inside the `Pages` directory
-3. **Add your shared views** e.g., _Layout.cshtml, _PartialView.cshtml to this Shared folder.
-4. In `Program.cs`: Ensure that Razor Pages are configured in your project.
-
-The code in `_Layout_` is from an example bootstrap dashboard:
-https://getbootstrap.com/docs/5.1/examples/dashboard/#
-
-## 3. Using the wwwroot folder in ASP.NET Core
-
-1. **Create** the `wwwroot` Folder in the root directory of your project.
-2. **Add Static Files**: Inside the `wwwroot` folder, you can create subfolders for organizing your static files, such as css, js, images, etc.
-
-Example:
-
-```plaintext
-wwwroot            
-├── css/     
-│   ├── site.css   
-├── js/          
-│   ├── site.js
-├── images/ 
-│   ├── logo.png            
-
-```
-
-# Database
-
-[![](https://www.youtube.com/watch?v=dwMFg6uxQ0I/{dwMFg6uxQ0I})](https://youtu.be/{dwMFg6uxQ0I})
+- **Backend**: Läuft auf `http://localhost:5000`
+- **Frontend**: Läuft auf `http://localhost:5001`
 
 
-## Publish Database
 
-**Instruction** Right Click on the `UserDB` Folder
+## 2. **Datenbanken**
 
-- **Target database connection**: your localdb  -> Copy the string, you'll need that later!
-- **Datbase name**: ApiDashboardDB
-- **Publish Script name**: UserDB.Sql
+<div style="border: 1px solid red; padding: 10px; background-color: #f8d7da; color: #721c24;">
+  <strong>Dieser Abschnitt ist noch nicht vollständig und wird laufend angepasst.</strong> 
+</div>
 
-![alt text](image-1.png)
+### Herunterladen von SQL Server Management Studio (SSMS)
 
+1. Download: https://aka.ms/ssmsfullsetup
+2. Database-Name: `ApiDashboardDB`
+3. Tabelle `User`.
 
-## Connection String
+## Connection String anpassen
 
 In `appsettings.json` : Replace the Connection String
 
@@ -75,10 +37,10 @@ Example:
 
 ```c#
  "ConnectionStrings": {
-   "Default": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ApiDashboard;Integrated Security=True;Connect Timeout=60;"
+   "Default": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ApiDashboardDB;Integrated Security=True;Connect Timeout=60;"
  }
 ```
 
-### Data Access with Dapper
+## 3. **Abschnitt**
 
-still in progress
+In progress
