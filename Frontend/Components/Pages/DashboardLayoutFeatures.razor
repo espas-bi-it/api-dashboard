@@ -11,8 +11,8 @@
         </div>
         <SfDashboardLayout @ref="dashboardObject" AllowFloating="true" AllowResizing="true" Columns="5">
             <DashboardLayoutPanels>
-                <DashboardLayoutPanel Id="one" Column="0" Row="0">
-                    <HeaderTemplate>Panel 1</HeaderTemplate>
+                <DashboardLayoutPanel Id="one" Column="0" Row="0" SizeX="2" SizeY="2">
+                    <HeaderTemplate>Sales (Panel 1) </HeaderTemplate>
                     <ContentTemplate>
                         <SfChart Title="Sales Analysis">
                             <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
