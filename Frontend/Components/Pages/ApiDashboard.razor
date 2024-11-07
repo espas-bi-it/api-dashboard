@@ -1,0 +1,217 @@
+﻿@page "/apidashboard"
+@rendermode InteractiveServer
+@using DataAccess.Models
+@using DataAccess.Services
+@using Frontend.Data
+@using Syncfusion.Blazor.Grids
+@inject UserService UserService
+
+
+<PageTitle>ESPAS Dashboard</PageTitle>
+
+<div class="container-fluid px-4">
+    <div class="row row-cols-1 row-cols-md-3">
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Line</span></div>
+                <div class="card-body">
+
+                    @using Syncfusion.Blazor.Charts
+
+                    <SfChart Title="Sales Analysis">
+                        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
+                        <ChartPrimaryYAxis Title="Sales in Dollar"></ChartPrimaryYAxis>
+                        <ChartSeriesCollection>
+                            <ChartSeries DataSource="@Sales" XName="Month" YName="SalesValue" Type="ChartSeriesType.Column">
+                                <ChartMarker>
+                                    <ChartDataLabel Visible="true"></ChartDataLabel>
+                                </ChartMarker>
+                            </ChartSeries>
+                        </ChartSeriesCollection>
+                        <ChartEvents OnPointRender="PointRenderEvent"></ChartEvents>
+                    </SfChart>
+
+                    @code {
+                        public class SalesInfo
+                        {
+                            public string Month { get; set; }
+                            public double SalesValue { get; set; }
+                        }
+
+                        public List<SalesInfo> Sales = new List<SalesInfo>
+                    {
+                    new SalesInfo { Month = "Jan", SalesValue = 40 },
+                    new SalesInfo { Month = "Feb", SalesValue = 20 },
+                    new SalesInfo { Month = "Mar", SalesValue = 26 },
+                    new SalesInfo { Month = "Apr", SalesValue = 20 },
+                    new SalesInfo { Month = "May", SalesValue = 40 },
+                    new SalesInfo { Month = "Jun", SalesValue = 32 },
+                    new SalesInfo { Month = "Jul", SalesValue = 35 }
+                    };
+
+                        private string[] colors = new string[] { "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53" };
+                        private int colorIndex = 0;
+
+                        public void PointRenderEvent(PointRenderEventArgs args)
+                        {
+                            args.Fill = colors[colorIndex % colors.Length];
+                            colorIndex++;
+                        }
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Bar</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <ul class="nav nav-underline-border" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-coreui-toggle="tab" href="#preview-1001" role="tab" aria-selected="true">
+                                    <svg class="icon me-2">
+                                    </svg>Preview
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="http://www.chartjs.org/" target="_blank" aria-selected="false" tabindex="-1" role="tab">
+                                    <svg class="icon me-2">
+                                    </svg>Code
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
+                                <div class="c-chart-wrapper">
+                                    <canvas id="canvas-2" style="display: block; box-sizing: border-box; height: 279px; width: 558px;" width="837" height="418"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Doughnut</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <ul class="nav nav-underline-border" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-coreui-toggle="tab" href="#preview-1002" role="tab" aria-selected="true">
+                                    <svg class="icon me-2">
+                                    </svg>Preview
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="http://www.chartjs.org/" target="_blank" aria-selected="false" tabindex="-1" role="tab">
+                                    <svg class="icon me-2">
+                                    </svg>Code
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1002">
+                                <div class="c-chart-wrapper">
+                                    <canvas id="canvas-3" style="display: block; box-sizing: border-box; height: 558px; width: 558px;" width="837" height="837"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Radar</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <ul class="nav nav-underline-border" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-coreui-toggle="tab" href="#preview-1003" role="tab" aria-selected="true">
+                                    <svg class="icon me-2">
+                                    </svg>Preview
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="http://www.chartjs.org/" target="_blank" aria-selected="false" tabindex="-1" role="tab">
+                                    <svg class="icon me-2">
+                                    </svg>Code
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1003">
+                                <div class="c-chart-wrapper">
+                                    <canvas id="canvas-4" style="display: block; box-sizing: border-box; height: 558px; width: 558px;" width="837" height="837"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Pie</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <ul class="nav nav-underline-border" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-coreui-toggle="tab" href="#preview-1004" role="tab" aria-selected="true">
+                                    <svg class="icon me-2">
+                                    </svg>Preview
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="http://www.chartjs.org/" target="_blank" aria-selected="false" tabindex="-1" role="tab">
+                                    <svg class="icon me-2">
+                                    </svg>Code
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1004">
+                                <div class="c-chart-wrapper">
+                                    <canvas id="canvas-5" style="display: block; box-sizing: border-box; height: 558px; width: 558px;" width="837" height="837"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Polar Area</span></div>
+                <div class="card-body">
+                    <div class="example">
+                        <ul class="nav nav-underline-border" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-coreui-toggle="tab" href="#preview-1005" role="tab" aria-selected="true">
+                                    <svg class="icon me-2">
+                                    </svg>Preview
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="http://www.chartjs.org/" target="_blank" aria-selected="false" tabindex="-1" role="tab">
+                                    <svg class="icon me-2">
+                                    </svg>Code
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1005">
+                                <div class="c-chart-wrapper">
+                                    <canvas id="canvas-6" style="display: block; box-sizing: border-box; height: 558px; width: 558px;" width="837" height="837"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
