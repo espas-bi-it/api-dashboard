@@ -273,7 +273,7 @@ ServiceFabricBackup/
 *.ndf
 
 # Only-Develpment files
-appsettings.Development.json
+**/appsettings.Development.json
 
 
 # Business Intelligence projects
