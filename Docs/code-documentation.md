@@ -2,27 +2,34 @@
 
 ## **Inhaltsverzeichnis**
 1. [Run Projekt](#run-project)
-1. [Projekteigenschaften](#projektkonfiguration)
-2. [Projektstrukturen](#projektstrukturen)
-3. [Datenbankkonfiguration](#datenbankkonfiguration)
-    - [Installaton SQL Server Express 2022](#installaton-sql-server)
-	- [Datenbankscripts ausführen](#db-publishen)
+2. [Projekteigenschaften](#projektkonfiguration)
+3. [Projektstrukturen](#projektstrukturen)
+4. [Datenbankverbindung](#database-connection)
+    - [SQL Skript ausführen](#run-sql-scripts)
+	- [Server-Name für Connection String auslesen](#get-connection-string)
+    - [Connection String in appsettings.json einfügen](#set-connection-string)
 
 ---
 
 
 ## 1. **How to run this project** <a name="run-project"></a>  
 
-1. Repository Klonen ``` https://github.com/espas-bi-it/api-dashboard.git ```
+1. Repository Klonen 
+   ```bash
+   https://github.com/espas-bi-it/api-dashboard.git
+   ```
 
-2. [Publish Database and Tables](#datenbankkonfiguration)
+2. [ApiDashboardDB Datenbank verbinden](#database-connection)
 
-3. Projekt starten ``` dotnet run --launch-profile https  ```  oder direkt in VS. 
-
-
+3. Projekt starten mit folgendem Command (oder direkt in Visual Studio)
+   ```bash
+   dotnet run --launch-profile https
+   ```
+ 
 ## 2. **Projekteigenschaften** <a name="projektkonfiguration"></a>  
 
 Die Solution **APIDashboard** besteht aus folgenden **eigenständige Projekten**.
+
 
 -  ### **ApiDashboard-Projekt**:
 	- **ASP.NET Core Web API**
@@ -70,10 +77,6 @@ Die Solution **APIDashboard** besteht aus folgenden **eigenständige Projekten**
 
 ```
 
-In der Vorlage habe ich die autoamtisch generierte ApiDashboard.http entfernt. Diese .http Datei ist zum testen der Api. Wir haben mit Swagger bereits alle Möglichkeiten http-request zu testen.
-
-
-
 ### **Frontend:** :arrow_down:
 
 ```plaintext
@@ -100,7 +103,7 @@ In der Vorlage habe ich die autoamtisch generierte ApiDashboard.http entfernt. D
 
 ```
 
-## Syncfusion
+#### Syncfusion
 
 Die Erweiterung **Syncfusion** ist installiert.
 
@@ -116,7 +119,7 @@ Syncfusion Blazor Template Studio ist kostenlos verfügbar und kann für Testpro
 Du kannst es nutzen, um Blazor-Anwendungen mit den vorgefertigten Syncfusion-Komponenten zu erstellen, einschließlich der Implementierung eines Logins.
 Allerdings musst du beachten, dass Syncfusion eine Lizenzierung für ihre Komponenten hat. Wenn du die NuGet-Pakete von Syncfusion verwendest, musst du einen Lizenzschlüssel registrieren, auch wenn du die Testversion nutzt. Für Testprojekte und Evaluierungen ist dies jedoch in der Regel problemlos möglich.
 
-### Installierte Packete:
+#### Installierte Packete:
 
 * syncfusion.blazor.bulletchart\27.1.58
 * syncfusion.blazor.buttons\27.1.58
@@ -146,7 +149,7 @@ Allerdings musst du beachten, dass Syncfusion eine Lizenzierung für ihre Kompon
 * syncfusion.blazor.treegrid\27.1.58
 * syncfusion.pdf.net.core\27.1.58
 
-Man kann weiter NuGet Packete hinzufügen.
+Man kann weitere NuGet Packete hinzufügen.
 
 ### **DataAccess:** :arrow_down:
 
@@ -175,115 +178,119 @@ Man kann weiter NuGet Packete hinzufügen.
 
 ```
 
-## 4. **Publish Database and Tables** <a name="datenbankkonfiguration"></a>  
+## 4. **Datenbankverbindung** <a name="database-connection"></a>  
 
- > ⚠️ **Warnung:** Dieser Abschnitt wird bei Bedarf noch angepasst.
 
-### Microsoft® SQL Server® 2022 Express installieren: <a name="installaton-sql-server"></a>  
+### SQL Skript ausführen: <a name="run-sql-scripts"></a>  
 
-Die SQL-Skripte laufen nur auf SQL-Server 2022. Wir müssen daher von SQL-Server 2019 auf die neuere Version upgraden.
+1.  [SQL-Server Management Studio](https://aka.ms/ssmsfullsetup) herunterladen und installieren
+2. **Verbindung zur Datenbank herstellen:** Verbinde dich mit deiner SQL Server-Instanz
+3. **SQL Skrpt ausführen:** In SQL-Server Management Studio" ein neues Query (New Query) erstellen und folgendes Script einfügen und anschliessend das Script mit "Execute" ausführen (grüner Pfeil):
 
-1. [Microsoft® SQL Server® 2022 Express](https://www.microsoft.com/de-de/download/details.aspx?id=104781 "Download") herunterladen und installieren
+```
+CREATE DATABASE ApiDashboard;
+GO
 
-2. **Installationstyp:** "Benutzerdefiniert" auswählen
+USE ApiDashboard;
+GO
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_1.png" width="700" />
+CREATE TABLE [dbo].[User]
+(
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [FirstName] NVARCHAR(50) NOT NULL, 
+    [LastName] NVARCHAR(50) NOT NULL
+);
+GO
 
-3. Diese Meldung mit „Ja“ bestätigen
+CREATE TABLE [dbo].[collaborator]
+(
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [FirstName] NVARCHAR(50) NOT NULL, 
+    [LastName] NVARCHAR(50) NOT NULL,
+    [TeamRole] NVARCHAR(50) NOT NULL
+);
+GO
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_2.png" width="700" />
+CREATE PROCEDURE [dbo].[spUser_Delete]
+    @Id INT
+AS
+BEGIN
+    DELETE FROM dbo.[User]
+    WHERE Id = @Id;
+END;
+GO
 
-4. Standardeinstellungen belassen und „Installieren“
+CREATE PROCEDURE [dbo].[spUser_Get]
+    @Id INT
+AS
+BEGIN
+    SELECT Id, FirstName, LastName
+    FROM dbo.[User]
+    WHERE Id = @Id;
+END;
+GO
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_3.png" width="700" />
+CREATE PROCEDURE [dbo].[spUser_GetAll]
+AS
+BEGIN
+    SELECT Id, FirstName, LastName
+    FROM dbo.[User];
+END;
+GO
 
-5. **Installation**: „New SQL Server standalone installation…“  auswählen
+CREATE PROCEDURE [dbo].[spUser_Insert]
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50)
+AS
+BEGIN
+    INSERT INTO dbo.[User] (FirstName, LastName)
+    VALUES (@FirstName, @LastName);
+END;
+GO
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_4.png" width="700" />
+CREATE PROCEDURE [dbo].[spUser_Update]
+    @Id INT,
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50)
+AS
+BEGIN
+    UPDATE dbo.[User]
+    SET FirstName = @FirstName, LastName = @LastName
+    WHERE Id = @Id;
+END;
+GO
 
-6. **License Terms**: „I accept…“ anklicken und dann auf  „Next“ 
+-- Daten in die Tabelle User einfügen
+INSERT INTO [dbo].[User] (FirstName, LastName)
+VALUES ('John', 'Doe'), ('Jane', 'Smith');
+GO
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_5.png" width="700" />
+-- Daten in die Tabelle collaborator einfügen
+INSERT INTO [dbo].[collaborator] (FirstName, LastName, TeamRole)
+VALUES ('Alice', 'Johnson', 'Developer'), ('Bob', 'Brown', 'Manager');
+GO
+```
 
-7. **Install Rules** So lassen und auf „Next“
+### Server-Name für Connection String auslesen: <a name="get-connection-string"></a>  
 
-<img src="https://bi-it-ws.github.io/doc-img/sqlserver_6.png" width="700" />
+1. **Datenbank auswählen:** Navigiere im Objekt-Explorer zu deiner Datenbank `ApiDashboard` (Falls die DB nicht sichtbar ist, refreshen)
+2. **Eigenschaften öffnen:** Klicke mit der rechten Maustaste auf die `ApiDashboard` und wähle **“Properties”** aus.
+3. Klicke auf "**View Connection Properties**"
+4. Kopiere den Wert naben **Server-Name**
 
-8. **Azure Extension for SQL Server**: Checkbox deaktivieren und auf "Next"
- 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_7.png" width="700" />
 
-9. **Feature Selection**: Bei **Shared Features** „LocalDB“ aktivieren und „Next“
+### Connection String in appsettings.json einfügen: <a name="set-connection-string"></a>  
 
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_8.png" width="700" />
-
-10. **Feature Rules**: Falls nicht bereits automatisch geschen auf „Next“
-	
-11. **Instance Configuration:** Default instance“ auswählen und „Next“
-	
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_9.png" width="700" />
-
-12. **Server Configuration:** 
-	
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_10.png" width="700" />
-
-13. **Database Engine Configuration:** Auf "Next"
-	
- <img src="https://bi-it-ws.github.io/doc-img/sqlserver_11.png" width="700" />
-
-15. **Installation Progress** Startet automatisch
-16.	**Complete:** Auf allfällige Fehler überprüfen und dann „Close“ 
-
-### Datenbank publishen: <a name="db-publishen"></a>  
-
-Bitte sicherstellen dass ihr das api-dashboard Repository geklont habt, auf dem aktuellen Stand sind (Kann mit git status überprüft werden) und dass Sie sich in Ihrem Branch befinden (kann mit git branch gemacht werden)
-
-1. ❗Visual Studio als **Administrator** ausführen
-2. ❗Das Repository `git clone https://github.com/espas-bi-it/api-dashboard.git` in das Verzeichnis **"C:\Users\benutzername\source\repos"** (oder ein anderes Verzeichnis, Hauptsache im "C:\Users\benutzername\") klonen
-Oder den entsprechenden Ordner auswählen wenn das Repo bereits geklont wurde.
-3. ❗In Ihren Branch wechseln: `git checkout dev_xyz`
-4. ❗`git pull` ausführen und mit `git status` überprüfen ob ihr Branch auf dem aktuellesten Stand ist
-3. In Visual Studio zum Projekt **"Database"**: Rechtsklick und **"Publish"** (oder Deutsch: "Veröffentlichen") auswählen
-
- <img src="https://bi-it-ws.github.io/doc-img/vssetup_2.png" width="400" />
-
-4. Im Folgenden Fenster auf „Edit“
-
- <img src="https://bi-it-ws.github.io/doc-img/vssetup_3.png" width="400" />
-
-5. Zum Tab „Browse/Durchsuchen“ navigieren und „Local“ aufklappen. 
-
- <img src="https://bi-it-ws.github.io/doc-img/vssetup_4.png" width="400" />
-
-Es sollte eine Instanz mit dem Namen **"ZH-EDU-WSXXX"“** sichtbar sein. Diesen bitte auswählen. Bei **Encript/Verschlüsseln** auf **"Optional (False)"** umstellen
-**"Test Connection"** ausführen. Wenn alles geklappt hat mit **"OK"** bestätigen.
-
-6. Database name: **APIDashboardDB** eingeben und dann **"Publish"**
-
-<img src="https://bi-it-ws.github.io/doc-img/vssetup_5.png" width="400" />
-
-7. Es sollte folgender Dialog innerhalb von Visual Studio erscheinen:
-
-<img src="https://bi-it-ws.github.io/doc-img/vssetup_6.png" width="400" />
-
-8. In VS den SQL Server-Object-Explorer öffnen (im Menüpunkt "View", oder "Ansicht"). Die Instanz beginnend mit "ZH-EDU…." aufklappen. Hier sollte nun unter "Databeses" die ApiDashboardDB sichtbar sein
-
-<img src="https://bi-it-ws.github.io/doc-img/vssetup_7.png" width="400" />
-
-9. Rechtsklick auf **"ApiDashboardDB"** und auf "Eigenschaften" klicken. Bei **"Connection-String"** (oder Deutsch "Verbindungszeichenfolge") den Wert kopieren (gelb markiert)
-
-<img src="https://bi-it-ws.github.io/doc-img/vssetup_8.png" width="400" />
-
-10. In den `appsettings.Development.json` Dateien in den Projekten **"ApiDashboard"** und **"Frontend"** den kopierten Wert bei **"Default"** einfügen und alles abspeichern. 
-	
-	❗Alle Parameter nach **"Timeout=60"** müssen entfernt werden.	
-	
-	Beispiel:
-	```c
-	"ConnectionStrings": {
-	"Default": "Data Source=ZH-EDU-WS078;Initial Catalog=ApiDashboardDB;Integrated Security=True;Connect Timeout=60"
-	}
-	```
- 
 > ℹ️ **Info:** Falls die Dateien `appsettings.Development.json` noch nicht existieren dann bitte eine in den jewiligen Stammverzeichnissen erstellen. Als Vorlage kann die bestehende `appsettings.json` genommen werden.
+
+Unter **"Default"** den formatieren String einfügen.
+
+Beispiel:
+ ```c
+"ConnectionStrings": {
+     "Default": "Server=[YOUR_SERVER_NAME];Database=ApiDashboard;Trusted_Connection=True;MultipleActiveResultSets=true"
+	}
+```
+
+Speichern nicht vergessen :-)
 	
