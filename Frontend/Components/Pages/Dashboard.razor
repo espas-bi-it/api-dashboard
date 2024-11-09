@@ -1,287 +1,249 @@
 ﻿@page "/dashboard"
 @rendermode InteractiveServer
+@using Frontend.Pages
+@using Syncfusion.Blazor.Layouts
 @using DataAccess.Models
 @using DataAccess.Services
 @using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
 @inject UserService UserService
 
-<PageTitle>ESPAS Dashboard</PageTitle>
-
-
-
-<main class="">
-
-
-
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
+<PageTitle>Api Dashboard</PageTitle>
+<h2>Api Dashboard</h2>
+<div id="control-region">
+    <div class="control-section" id="target">
+        <div style="padding:5px;text-align:right;">
+            <Syncfusion.Blazor.Buttons.SfButton CssClass="e-btn e-info" Content="Add Panel" @onclick="AddClick"></Syncfusion.Blazor.Buttons.SfButton>
         </div>
-    </div>
+        <SfDashboardLayout @ref="dashboardObject" AllowFloating="true" AllowResizing="true" Columns="5">
+            <DashboardLayoutPanels>
+                <DashboardLayoutPanel Id="one" Column="0" Row="0">
+                    <HeaderTemplate>Panel 1</HeaderTemplate>
+                    <ContentTemplate>
+                        <SfChart Title="User Analysis">
+                            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Last Name"></ChartPrimaryXAxis>
+                            <ChartPrimaryYAxis Title="Count"></ChartPrimaryYAxis>
+                            <ChartSeriesCollection>
+                                <ChartSeries DataSource="@Users" XName="LastName" YName="Id" Type="ChartSeriesType.Bar">
+                                    <ChartMarker>
+                                        <ChartDataLabel Visible="true"></ChartDataLabel>
+                                    </ChartMarker>
+                                </ChartSeries>
+                            </ChartSeriesCollection>
+                        </SfChart>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="two" Row="1" Column="1" SizeX=2 SizeY=2>
+                    <HeaderTemplate>Panel 2</HeaderTemplate>
+                    <ContentTemplate>
 
-    <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Earnings (Monthly)
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Annual)
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Tasks
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending Requests
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row row-cols-3 pt-4">
-        <!-- Line Chart-->
-        <div class="col">
-            <div class="card mb-4">
-                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Line</span></div>
-                <div class="card-body">
-                    <div class="example">
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                <span data-feather="calendar"></span>
-                                Filter
-                            </button>
-                        </div>
-                        <div class="tab-content rounded-bottom">
-                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
-                                <div class="c-chart-wrapper">
-                                    <SfChart Title="Sales Analysis">
-                                        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
-                                        <ChartPrimaryYAxis Title="Sales in Dollar"></ChartPrimaryYAxis>
-                                        <ChartSeriesCollection>
-                                            <ChartSeries DataSource="@Sales" XName="Month" YName="SalesValue" Type="ChartSeriesType.Column">
-                                                <ChartMarker>
-                                                    <ChartDataLabel Visible="true"></ChartDataLabel>
-                                                </ChartMarker>
-                                            </ChartSeries>
-                                        </ChartSeriesCollection>
-                                    </SfChart>
-
-                                    @code {
-                                        public class SalesInfo
-                                        {
-                                            public string Month { get; set; }
-                                            public double SalesValue { get; set; }
-                                        }
-
-                                        public List<SalesInfo> Sales = new List<SalesInfo>
-                                    {
-                                    new SalesInfo { Month = "Jan", SalesValue = 20 },
-                                    new SalesInfo { Month = "Feb", SalesValue = 20 },
-                                    new SalesInfo { Month = "Mar", SalesValue = 20 },
-                                    new SalesInfo { Month = "Apr", SalesValue = 20 },
-                                    new SalesInfo { Month = "May", SalesValue = 40 },
-                                    new SalesInfo { Month = "Jun", SalesValue = 32 },
-                                    new SalesInfo { Month = "Jul", SalesValue = 35 }
-                                    };
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- Bar Chart-->
-        <div class="col">
-            <div class="card mb-4">
-                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Bar</span></div>
-                <div class="card-body">
-                    <div class="example">
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                <span data-feather="calendar"></span>
-                                Filter
-                            </button>
-                        </div>
-                        <div class="tab-content rounded-bottom">
-                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
-                                <div class="c-chart-wrapper">
-                                    <SfChart Title="User Analysis">
-                                        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Last Name"></ChartPrimaryXAxis>
-                                        <ChartPrimaryYAxis Title="Count"></ChartPrimaryYAxis>
-                                        <ChartSeriesCollection>
-                                            <ChartSeries DataSource="@Users" XName="LastName" YName="Id" Type="ChartSeriesType.Bar">
-                                                <ChartMarker>
-                                                    <ChartDataLabel Visible="true"></ChartDataLabel>
-                                                </ChartMarker>
-                                            </ChartSeries>
-                                        </ChartSeriesCollection>
-                                    </SfChart>
-
-                                    @code {
-                                        private IEnumerable<UserModel> Users;
-
-                                        protected override async Task OnInitializedAsync()
-                                        {
-                                            Users = await UserService.GetUsersAsync();
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bar Chart 2-->
-        <div class="col">
-            <div class="card mb-4">
-                <div class="card-header"><strong>Chart</strong><span class="small ms-1">Bar</span></div>
-                <div class="card-body">
-                    <div class="example">
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                <span data-feather="calendar"></span>
-                                Filter
-                            </button>
-                        </div>
-                        <div class="tab-content rounded-bottom">
-                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
-                                <div class="c-chart-wrapper">
-                                   
-
-                                    <SfGrid DataSource="@Orders" AllowPaging="true" AllowSorting="true" AllowFiltering="true">
-                                        <GridPageSettings PageSize="10"></GridPageSettings>
+                        <div class="col-lg-12 control-section">
+                            <div class="content-wrapper">
+                                <div class="row">
+                                    <SfGrid DataSource="@GridData" AllowFiltering="true" AllowPaging="true">
+                                        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
+                                        <GridPageSettings PageCount="3" PageSize="18"></GridPageSettings>
                                         <GridColumns>
-                                            <GridColumn Field=@nameof(Order.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
-                                            <GridColumn Field=@nameof(Order.CustomerID) HeaderText="Customer Name" Width="150"></GridColumn>
-                                            <GridColumn Field=@nameof(Order.OrderDate) HeaderText=" Order Date" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="130"></GridColumn>
-                                            <GridColumn Field=@nameof(Order.Freight) HeaderText="Freight" Format="C2" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+                                            <GridColumn Field=@nameof(Orders.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+                                            <GridColumn Field=@nameof(Orders.CustomerID) HeaderText="Customer ID" Width="150"></GridColumn>
+                                            <GridColumn Field=@nameof(Orders.Freight) TextAlign="TextAlign.Right" Width="120" Format="C2"></GridColumn>
+                                            <GridColumn Field=@nameof(Orders.OrderDate) HeaderText="Order Date" Format="d" Type="ColumnType.DateOnly" TextAlign="TextAlign.Right" Width="150"></GridColumn>
+                                            <GridColumn Field=@nameof(Orders.ShipCity) HeaderText="Ship City" Width="150"></GridColumn>
                                         </GridColumns>
                                     </SfGrid>
-
-                                    @code {
-                                        public List<Order> Orders { get; set; }
-
-                                        protected override void OnInitialized()
-                                        {
-                                            Orders = Enumerable.Range(1, 75).Select(x => new Order()
-            {
-                OrderID = 1000 + x,
-                CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
-                Freight = 2.1 * x,
-                OrderDate = DateTime.Now.AddDays(-x),
-            }).ToList();
-                                        }
-
-                                        public class Order
-                                        {
-                                            public int? OrderID { get; set; }
-                                            public string CustomerID { get; set; }
-                                            public DateTime? OrderDate { get; set; }
-                                            public double? Freight { get; set; }
-                                        }
-                                    }
-
-
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+
+                @code {
+        public List<Orders> GridData { get; set; }
+        public class FilterType
+        {
+            public string id { get; set; }
+            public string type { get; set; }
+        }
+        protected override void OnInitialized()
+        {
+            GridData = Orders.GetAllRecords();
+        }
+                }
+                
+                <DashboardLayoutPanel Id="three" Row="0" Column="1" SizeX=2 SizeY=2>
+                    <HeaderTemplate>Panel 3</HeaderTemplate>
+                    <ContentTemplate>
+                        <SfChart Title="Sales Analysis">
+                            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month"></ChartPrimaryXAxis>
+                            <ChartPrimaryYAxis Title="Sales in Dollar"></ChartPrimaryYAxis>
+                            <ChartSeriesCollection>
+                                <ChartSeries DataSource="@Sales" XName="Month" YName="SalesValue" Type="ChartSeriesType.Column">
+                                    <ChartMarker>
+                                        <ChartDataLabel Visible="true"></ChartDataLabel>
+                                    </ChartMarker>
+                                </ChartSeries>
+                            </ChartSeriesCollection>
+                            <ChartEvents OnPointRender="PointRenderEvent"></ChartEvents>
+                        </SfChart>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="four" Row="1" Column="1" SizeX=1 SizeY=1>
+                    <HeaderTemplate>Panel 4</HeaderTemplate>
+                    <ContentTemplate>
+                        <h2>Panel 4</h2>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="five" Row="2" Column="2" SizeX=1 SizeY=1>
+                    <HeaderTemplate>Panel 5</HeaderTemplate>
+                    <ContentTemplate>
+                    
+                        <SfAccumulationChart Title="Mobile Browser Statistics">
+                            <AccumulationChartSeriesCollection>
+                                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users"
+                                                         Name="Browser">
+                                </AccumulationChartSeries>
+                            </AccumulationChartSeriesCollection>
+
+                            <AccumulationChartLegendSettings Visible="true"></AccumulationChartLegendSettings>
+                        </SfAccumulationChart>
+
+                        @code {
+                        public class Statistics
+                        {
+                            public string Browser { get; set; }
+                            public double Users { get; set; }
+                        }
+
+                        public List<Statistics> StatisticsDetails = new List<Statistics>
+                            {
+                            new Statistics { Browser = "Chrome", Users = 37 },
+                            new Statistics { Browser = "UC Browser", Users = 17 },
+                            new Statistics { Browser = "iPhone", Users = 19 },
+                            new Statistics { Browser = "Others", Users = 4  },
+                            new Statistics { Browser = "Opera", Users = 11 },
+                            new Statistics { Browser = "Android", Users = 12 },
+                            };
+                            }
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="six" Row="0" Column="3" SizeX=1 SizeY=1>
+                    <HeaderTemplate>Panel 6</HeaderTemplate>
+                    <ContentTemplate>
+                        <h2>Panel 6</h2>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="seven" Row="1" Column="3" SizeX=1 SizeY=1>
+                    <HeaderTemplate>Panel 7</HeaderTemplate>
+                    <ContentTemplate>
+                        <h2>Panel 7</h2>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+                <DashboardLayoutPanel Id="eight" Row="0" Column="3" SizeX=1 SizeY=1>
+                    <HeaderTemplate>Panel 8</HeaderTemplate>
+                    <ContentTemplate>
+                        <h2>Panel 8</h2>
+                    </ContentTemplate>
+                </DashboardLayoutPanel>
+            </DashboardLayoutPanels>
+        </SfDashboardLayout>
+
+            @code {
+                private IEnumerable<UserModel> Users;
+
+                protected override async Task OnInitializedAsync()
+                {
+                    Users = await UserService.GetUsersAsync();
+                }
+
+                public class SalesInfo
+                {
+                    public string Month { get; set; }
+                    public double SalesValue { get; set; }
+                }
+
+                public List<SalesInfo> Sales = new List<SalesInfo>
+                    {
+                    new SalesInfo { Month = "Jan", SalesValue = 40 },
+                    new SalesInfo { Month = "Feb", SalesValue = 20 },
+                    new SalesInfo { Month = "Mar", SalesValue = 26 },
+                    new SalesInfo { Month = "Apr", SalesValue = 20 },
+                    new SalesInfo { Month = "May", SalesValue = 40 },
+                    new SalesInfo { Month = "Jun", SalesValue = 32 },
+                    new SalesInfo { Month = "Jul", SalesValue = 35 }
+                    };
+
+                private string[] colors = new string[] { "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53" };
+                private int colorIndex = 0;
+
+                public void PointRenderEvent(PointRenderEventArgs args)
+                {
+                    args.Fill = colors[colorIndex % colors.Length];
+                    colorIndex++;
+                }
+            }
+
     </div>
-</main>
+</div>
+<br />
+<style>
+    .e-dashboardlayout {
+        padding: 10px;
+    }
 
+        .e-dashboardlayout.e-control .e-panel:hover span {
+            display: block;
+        }
 
+        .e-dashboardlayout .e-panel .e-panel-container .text-align {
+            vertical-align: middle;
+            font-weight: 600;
+            font-size: 20px;
+            text-align: center;
+        }
+
+    .e-template-icon {
+        padding: 10px;
+        float: right;
+        display: none;
+    }
+
+    .text-align {
+        line-height: 160px;
+    }
+
+    .sb-demo-section .container-fluid {
+        background: #E5E5E5;
+    }
+
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+
+    .list {
+        float: left;
+        line-height: 20px;
+        margin: 10px;
+        min-width: 350px;
+    }
+</style>
+@code {
+    SfDashboardLayout? dashboardObject;
+    public int Count = 9;
+    public async Task AddClick(System.EventArgs args)
+    {
+        string ContentValue = this.Count.ToString();
+        PanelModel panel = new PanelModel
+                {
+                    Id = this.Count.ToString() + "_layout",
+                    SizeX = 1,
+                    SizeY = 1,
+                    Column = 0,
+                    Row = 0,
+                    Header = @<div class='text-align'> Panel @ContentValue </div>
+        };
+        await dashboardObject!.AddPanelAsync(panel);
+        this.Count = this.Count + 1;
+    }
+}
