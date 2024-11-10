@@ -7,6 +7,7 @@
 @using Syncfusion.Blazor.Grids
 @using Syncfusion.Blazor.DropDowns
 @inject UserService UserService
+@inject CollaboratorService OrderService
 
 <PageTitle>Api Dashboard</PageTitle>
 <h2>Api Dashboard</h2>
@@ -44,11 +45,10 @@
                                         <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
                                         <GridPageSettings PageCount="3" PageSize="18"></GridPageSettings>
                                         <GridColumns>
-                                            <GridColumn Field=@nameof(Orders.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
-                                            <GridColumn Field=@nameof(Orders.CustomerID) HeaderText="Customer ID" Width="150"></GridColumn>
-                                            <GridColumn Field=@nameof(Orders.Freight) TextAlign="TextAlign.Right" Width="120" Format="C2"></GridColumn>
-                                            <GridColumn Field=@nameof(Orders.OrderDate) HeaderText="Order Date" Format="d" Type="ColumnType.DateOnly" TextAlign="TextAlign.Right" Width="150"></GridColumn>
-                                            <GridColumn Field=@nameof(Orders.ShipCity) HeaderText="Ship City" Width="150"></GridColumn>
+                                            <GridColumn Field=@nameof(Collaborator.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+                                            <GridColumn Field=@nameof(Collaborator.FirstName) HeaderText="First Name" Width="150"></GridColumn>
+                                            <GridColumn Field=@nameof(Collaborator.LastName) HeaderText="Last Name" Width="150"></GridColumn>
+                                            <GridColumn Field=@nameof(Collaborator.TeamRole) HeaderText="Team Role" Width="150"></GridColumn>
                                         </GridColumns>
                                     </SfGrid>
                                 </div>
@@ -56,20 +56,14 @@
                         </div>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-
                 @code {
-        public List<Orders> GridData { get; set; }
-        public class FilterType
+        public List<Collaborator> GridData { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
-            public string id { get; set; }
-            public string type { get; set; }
-        }
-        protected override void OnInitialized()
-        {
-            GridData = Orders.GetAllRecords();
+            GridData = (await OrderService.GetCollaboratorsAsync()).ToList();
         }
                 }
-                
                 <DashboardLayoutPanel Id="three" Row="0" Column="1" SizeX=2 SizeY=2>
                     <HeaderTemplate>Panel 3</HeaderTemplate>
                     <ContentTemplate>
@@ -150,11 +144,7 @@
             @code {
                 private IEnumerable<UserModel> Users;
 
-                protected override async Task OnInitializedAsync()
-                {
-                    Users = await UserService.GetUsersAsync();
-                }
-
+             
                 public class SalesInfo
                 {
                     public string Month { get; set; }

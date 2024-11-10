@@ -86,7 +86,7 @@ Die Solution **APIDashboard** besteht aus folgenden **eigenständige Projekten**
 │   ├── /Components			
 │   │    └── Layout			-> Ordner für HTML-Struktur und Stylesheets
 │   │    └── Pages			
-│   │        └── ApiDashboard.razor	-> Dashboard-View (/apidashboard)
+│   │        └── Dashboard.razor	-> Dashboard-View (/dashboard)
 │   │        └── Index.razor		-> Syncfusion Beispiel Komponenten
 │   │    └── _Imports.razor		-> Zentrale Anweisungen/Direktiven für alle Razor-Komponenten
 │   │    └── App.razor			-> Definiert Routing und Layout der Anwendung
