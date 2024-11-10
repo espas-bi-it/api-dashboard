@@ -16,7 +16,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 // Add Dapper service
-builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<UserService>();  // Registriere den UserService
+
+
+// Füge die Verbindungszeichenfolge hinzu
+var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddSingleton(new CollaboratorService(connectionString));
 
 var app = builder.Build();
 //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
