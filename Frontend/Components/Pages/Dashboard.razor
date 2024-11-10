@@ -6,6 +6,8 @@
 @using DataAccess.Services
 @using Syncfusion.Blazor.Grids
 @using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Charts
+@inject NavigationManager NavigationManager
 @inject UserService UserService
 @inject CollaboratorService OrderService
 
@@ -34,7 +36,7 @@
                         </SfChart>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="two" Row="1" Column="1" SizeX=2 SizeY=2>
+                <DashboardLayoutPanel Id="two" Row="0" Column="1" SizeX=2 SizeY=2>
                     <HeaderTemplate>Panel 2</HeaderTemplate>
                     <ContentTemplate>
 
@@ -57,14 +59,14 @@
                     </ContentTemplate>
                 </DashboardLayoutPanel>
                 @code {
-        public List<Collaborator> GridData { get; set; }
+                    public List<Collaborator> GridData { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            GridData = (await OrderService.GetCollaboratorsAsync()).ToList();
-        }
-                }
-                <DashboardLayoutPanel Id="three" Row="0" Column="1" SizeX=2 SizeY=2>
+                    protected override async Task OnInitializedAsync()
+                    {
+                        GridData = (await OrderService.GetCollaboratorsAsync()).ToList();
+                    }
+                            }
+                <DashboardLayoutPanel Id="three" Row="1" Column="0" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 3</HeaderTemplate>
                     <ContentTemplate>
                         <SfChart Title="Sales Analysis">
@@ -81,13 +83,13 @@
                         </SfChart>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="four" Row="1" Column="1" SizeX=1 SizeY=1>
+                <DashboardLayoutPanel Id="four" Row="0" Column="3" SizeX=2 SizeY=2>
                     <HeaderTemplate>Panel 4</HeaderTemplate>
                     <ContentTemplate>
                         <h2>Panel 4</h2>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="five" Row="2" Column="2" SizeX=1 SizeY=1>
+                <DashboardLayoutPanel Id="five" Row="1" Column="1" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 5</HeaderTemplate>
                     <ContentTemplate>
                     
@@ -102,31 +104,119 @@
                         </SfAccumulationChart>
 
                         @code {
-                        public class Statistics
-                        {
-                            public string Browser { get; set; }
-                            public double Users { get; set; }
-                        }
-
-                        public List<Statistics> StatisticsDetails = new List<Statistics>
+                            public class Statistics
                             {
-                            new Statistics { Browser = "Chrome", Users = 37 },
-                            new Statistics { Browser = "UC Browser", Users = 17 },
-                            new Statistics { Browser = "iPhone", Users = 19 },
-                            new Statistics { Browser = "Others", Users = 4  },
-                            new Statistics { Browser = "Opera", Users = 11 },
-                            new Statistics { Browser = "Android", Users = 12 },
-                            };
+                                public string Browser { get; set; }
+                                public double Users { get; set; }
                             }
+
+                            public List<Statistics> StatisticsDetails = new List<Statistics>
+                                {
+                                new Statistics { Browser = "Chrome", Users = 37 },
+                                new Statistics { Browser = "UC Browser", Users = 17 },
+                                new Statistics { Browser = "iPhone", Users = 19 },
+                                new Statistics { Browser = "Others", Users = 4  },
+                                new Statistics { Browser = "Opera", Users = 11 },
+                                new Statistics { Browser = "Android", Users = 12 },
+                                };
+                         }
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="six" Row="0" Column="3" SizeX=1 SizeY=1>
+                <DashboardLayoutPanel Id="six" Row="1" Column="2" SizeX="2" SizeY="2">
                     <HeaderTemplate>Panel 6</HeaderTemplate>
                     <ContentTemplate>
-                        <h2>Panel 6</h2>
+                        <div class="control-section" align='center'>
+                            <SfChart Title="Stock Price Analysis" Width="@Width">
+                                <ChartArea>
+                                    <ChartAreaBorder Width="0"></ChartAreaBorder>
+                                </ChartArea>
+                                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.DateTime" EdgeLabelPlacement="EdgeLabelPlacement.Shift">
+                                    <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
+                                </ChartPrimaryXAxis>
+                                <ChartPrimaryYAxis Title="Price" LabelFormat="${value}" RangePadding="ChartRangePadding.None">
+                                    <ChartAxisLineStyle Width="0"></ChartAxisLineStyle>
+                                    <ChartAxisMajorTickLines Width="0"></ChartAxisMajorTickLines>
+                                    <ChartAxisMinorTickLines Width="0"></ChartAxisMinorTickLines>
+                                </ChartPrimaryYAxis>
+                                <ChartSeriesCollection>
+                                    <ChartSeries Type="ChartSeriesType.Line" DataSource="@ChartPointsX" XName="Period" YName="StockPrice" Width="2" Name="Product X">
+                                    </ChartSeries>
+                                    <ChartSeries Type="ChartSeriesType.Line" DataSource="@ChartPointsY" XName="Period" YName="StockPrice" Width="2" Name="Product Y">
+                                    </ChartSeries>
+                                </ChartSeriesCollection>
+                                <ChartCrosshairSettings Enable="true" LineType="LineType.Vertical">
+                                    <ChartCrosshairLine Color="rgba(204,214,235,0.25)" Width="20"></ChartCrosshairLine>
+                                </ChartCrosshairSettings>
+                                <ChartTooltipSettings Enable="true" Shared="true"></ChartTooltipSettings>
+                                <ChartLegendSettings EnableHighlight="true"></ChartLegendSettings>
+                            </SfChart>
+                        </div>
+                        @code {
+                            private Random randomNum = new Random();
+                            public string Width
+                            {
+                                get;
+                                set;
+                            } = "90%";
+                            private double stockPriceX = 80,
+                            stockPriceY = 90;
+                            public List<LineChartData> ChartPointsX
+                            {
+                                get;
+                                set;
+                            } = new List<LineChartData>();
+                            public List<LineChartData> ChartPointsY
+                            {
+                                get;
+                                set;
+                            } = new List<LineChartData>();
+                            protected override void OnInitialized()
+                            {
+                                GetChartPoints();
+                            }
+                            private void GetChartPoints()
+                            {
+                                for (int i = 1; i < 500; i++)
+                                {
+                                    if (randomNum.NextDouble() > 0.5)
+                                    {
+                                                stockPriceX += randomNum.NextDouble();
+                                                stockPriceY += randomNum.NextDouble();
+                                    }
+                                    else
+                                    {
+                                                stockPriceX -= randomNum.NextDouble();
+                                                stockPriceY -= randomNum.NextDouble();
+                                    }
+                                    ChartPointsX.Add(new LineChartData
+                                    {
+                                        Period = new DateTime(1960, 1, 1).AddMonths(i + 1).AddDays(i),
+                                        StockPrice = Math.Round(stockPriceX)
+                                    });
+                                    ChartPointsY.Add(new LineChartData
+                                    {
+                                        Period = new DateTime(1960, 1, 1).AddMonths(i + 1).AddDays(i),
+                                        StockPrice = Math.Round(stockPriceY)
+                                    });
+                                }
+                            }
+                            public class LineChartData
+                            {
+                                public DateTime Period
+                                {
+                                    get;
+                                    set;
+                                }
+                                public double StockPrice
+                                {
+                                    get;
+                                    set;
+                                }
+                            }
+                        }
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="seven" Row="1" Column="3" SizeX=1 SizeY=1>
+                <DashboardLayoutPanel Id="seven" Row="1" Column="4" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 7</HeaderTemplate>
                     <ContentTemplate>
                         <h2>Panel 7</h2>
@@ -225,13 +315,13 @@
     {
         string ContentValue = this.Count.ToString();
         PanelModel panel = new PanelModel
-                {
-                    Id = this.Count.ToString() + "_layout",
-                    SizeX = 1,
-                    SizeY = 1,
-                    Column = 0,
-                    Row = 0,
-                    Header = @<div class='text-align'> Panel @ContentValue </div>
+        {
+            Id = this.Count.ToString() + "_layout",
+            SizeX = 1,
+            SizeY = 1,
+            Column = 0,
+            Row = 0,
+            Header = @<div class='text-align'> Panel @ContentValue </div>
         };
         await dashboardObject!.AddPanelAsync(panel);
         this.Count = this.Count + 1;

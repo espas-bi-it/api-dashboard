@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddSignalR(o => { o.MaximumReceiveMessageSize = 102400000; });
 builder.Services.AddSyncfusionBlazor();
-            builder.Services.AddSingleton<PdfService>();
+builder.Services.AddSingleton<PdfService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
