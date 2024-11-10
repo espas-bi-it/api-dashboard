@@ -273,8 +273,8 @@ ServiceFabricBackup/
 *.ndf
 
 # Only-Develpment files
-ApiDashboard/appsettings.Development.json
-Frontend/appsettings.Development.json
+**/appsettings.Development.json
+
 
 # Business Intelligence projects
 *.rdl.data
