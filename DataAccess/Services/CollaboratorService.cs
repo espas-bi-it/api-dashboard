@@ -1,9 +1,8 @@
-﻿using Dapper;
-using DataAccess.Models;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Dapper;
+using DataAccess.Models;
 
 namespace DataAccess.Services
 {
@@ -18,10 +17,10 @@ namespace DataAccess.Services
 
         public async Task<IEnumerable<Collaborator>> GetCollaboratorsAsync()
         {
-            using (IDbConnection db = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                string sqlQuery = "SELECT * FROM collaborator";
-                return await db.QueryAsync<Collaborator>(sqlQuery);
+                var query = "SELECT * FROM collaborator";
+                return await connection.QueryAsync<Collaborator>(query);
             }
         }
     }
