@@ -370,4 +370,12 @@ INSERT INTO User (FirstName, LastName) VALUES ('John', 'Doe'), ('Jane', 'Smith')
 -- Daten in die Tabelle collaborator einfügen
 INSERT INTO collaborator (FirstName, LastName, TeamRole) VALUES ('Alice', 'Johnson', 'Developer'), ('Bob', 'Brown', 'Manager');
 ```
-	
+## Connection String angpassen
+
+Der Connection-String im appsettings.Development.json sieht so aus:
+
+```
+  "ConnectionStrings": {
+    "Default": "Server=localhost;Database=ApiDashboard;User Id=root;Password=;"
+  }
+```
