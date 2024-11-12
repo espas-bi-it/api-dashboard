@@ -7,10 +7,11 @@
 @using Syncfusion.Blazor.Grids
 @using Syncfusion.Blazor.DropDowns
 @using Syncfusion.Blazor.Charts
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.XlsIO
 @inject NavigationManager NavigationManager
 @inject UserService UserService
-@inject CollaboratorService OrderService
-
+@inject CollaboratorService CollaboratorService
 <PageTitle>Api Dashboard</PageTitle>
 <h2>Api Dashboard</h2>
 <div id="control-region">
@@ -20,6 +21,8 @@
         </div>
         <SfDashboardLayout @ref="dashboardObject" AllowFloating="true" AllowResizing="true" Columns="5">
             <DashboardLayoutPanels>
+
+               
                 <DashboardLayoutPanel Id="one" Column="0" Row="0">
                     <HeaderTemplate>Panel 1</HeaderTemplate>
                     <ContentTemplate>
@@ -37,8 +40,6 @@
                     </ContentTemplate>
                 </DashboardLayoutPanel>
             
-              
-
                 <DashboardLayoutPanel Id="three" Row="1" Column="0" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 3</HeaderTemplate>
                     <ContentTemplate>
@@ -91,65 +92,58 @@
                     </ContentTemplate>
                 </DashboardLayoutPanel>
            
+                <!-- Collaborators List-->
                 <DashboardLayoutPanel Id="seven" Row="0" Column="0" SizeX="3" SizeY="3">
                     <HeaderTemplate>Team Members (Panel 7)</HeaderTemplate>
                     <ContentTemplate>
-                        <SfGrid ID="Grid" DataSource="@Orders" @ref="Grid" AllowPaging="true" AllowFiltering="true" AllowReordering="true" AllowResizing="true" AllowGrouping="true" AllowExcelExport="true" AllowSelection="true"
-                                AllowSorting="true" Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Cancel", "Update", "ExcelExport", "Search" })" Height="100%" Width="100%">
+                        <SfGrid @ref="Grid" DataSource="@Collaborators" AllowPaging="true" AllowSorting="true" AllowFiltering="true" Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel", "Search", "ExcelExport" })">
                             <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="Syncfusion.Blazor.Grids.EditMode.Normal"></GridEditSettings>
-                            <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.FilterBar"></GridFilterSettings>
-                            <GridPageSettings PageSize="20" PageSizes="true"></GridPageSettings>
-                            <GridSelectionSettings Type="Syncfusion.Blazor.Grids.SelectionType.Multiple"></GridSelectionSettings>
-                            <GridEvents OnToolbarClick="ToolbarClick" TValue="Order"></GridEvents>
                             <GridColumns>
-                                <GridColumn Type="Syncfusion.Blazor.Grids.ColumnType.CheckBox" Width="50"></GridColumn>
-                                <GridColumn Field="@nameof(Order.OrderID)" HeaderText="Order ID" IsPrimaryKey="true" ValidationRules="@(new ValidationRules { Required = true })" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="120"></GridColumn>
-                                <GridColumn Field="@nameof(Order.CustomerID)" HeaderText="Customer Name" ValidationRules="@(new ValidationRules { Required = true })" Width="120"></GridColumn>
-                                <GridColumn Field="@nameof(Order.OrderDate)" HeaderText="Order Date" EditType="EditType.DatePickerEdit" Format="d" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="130" Type="Syncfusion.Blazor.Grids.ColumnType.Date"></GridColumn>
-                                <GridColumn Field="@nameof(Order.Freight)" HeaderText="Freight" Format="C2" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" EditType="EditType.NumericEdit" Width="120"></GridColumn>
-                                <GridColumn Field="@nameof(Order.ShipCountry)" HeaderText="Ship Country" EditType="EditType.DropDownEdit" Width="150"></GridColumn>
+                                <GridColumn Field="Id" HeaderText="ID" IsPrimaryKey="true" Width="100"></GridColumn>
+                                <GridColumn Field="FirstName" HeaderText="First Name" Width="150"></GridColumn>
+                                <GridColumn Field="LastName" HeaderText="Last Name" Width="150"></GridColumn>
+                                <GridColumn Field="TeamRole" HeaderText="Team Role" Width="150"></GridColumn>
+                                <GridColumn Field="Created" HeaderText="Created" Format="d" Width="150"></GridColumn>
+                                <GridColumn Field="Sales" HeaderText="Sales" Width="100"></GridColumn>
                             </GridColumns>
+                            <GridEvents TValue="Collaborator" OnToolbarClick="ToolbarClick"></GridEvents>
                         </SfGrid>
+
+
+
+
+                        @code {
+                            private SfGrid<Collaborator>? Grid;
+                            private IEnumerable<Collaborator> Collaborators;
+
+                            protected override async Task OnInitializedAsync()
+                            {
+                                Collaborators = await CollaboratorService.GetCollaboratorsAsync();
+                            }
+
+                            private void ToolbarClick(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+                            {
+                                if (args.Item.Id == "Grid_excelexport")
+                                {
+                                    Grid?.ExportToExcelAsync();
+                                }
+                            }
+                        }
+
                     </ContentTemplate>
                 </DashboardLayoutPanel>
 
-                @code {
-        public List<Order>? Orders { get; set; }
-        SfGrid<Order>? Grid;
-        protected override void OnInitialized()
-        {
-            Orders = Enumerable.Range(1, 75).Select(x => new Order()
-            {
-                OrderID = 1000 + x,
-                CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
-                Freight = 2.1 * x,
-                OrderDate = DateTime.Now.AddDays(-x),
-                ShipCountry = (new string[] { "USA", "UK", "CHINA", "RUSSIA", "INDIA" })[new Random().Next(5)]
-            }).ToList();
-        }
-        public void ToolbarClick(Syncfusion.Blazor.Navigations.ClickEventArgs args)
-        {
-            if (args.Item.Id == "Grid_excelexport")
-            {
-                    this.Grid?.ExportToExcelAsync();
-            }
-        }
-        public class Order
-        {
-            public int? OrderID { get; set; }
-            public string? CustomerID { get; set; }
-            public DateTime? OrderDate { get; set; }
-            public double? Freight { get; set; }
-            public string? ShipCountry { get; set; }
-        }
-                }
+                
 
+                <!-- Empty -->
                 <DashboardLayoutPanel Id="eight" Row="0" Column="3" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 8</HeaderTemplate>
                     <ContentTemplate>
                         <h2>Panel 8</h2>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
+
+
             </DashboardLayoutPanels>
         </SfDashboardLayout>
 
@@ -157,79 +151,40 @@
                 private IEnumerable<UserModel> Users;
 
              
-                public class SalesInfo
-                {
-                    public string Month { get; set; }
-                    public double SalesValue { get; set; }
-                }
-
-                public List<SalesInfo> Sales = new List<SalesInfo>
+                    public class SalesInfo
                     {
-                    new SalesInfo { Month = "Jan", SalesValue = 40 },
-                    new SalesInfo { Month = "Feb", SalesValue = 20 },
-                    new SalesInfo { Month = "Mar", SalesValue = 26 },
-                    new SalesInfo { Month = "Apr", SalesValue = 20 },
-                    new SalesInfo { Month = "May", SalesValue = 40 },
-                    new SalesInfo { Month = "Jun", SalesValue = 32 },
-                    new SalesInfo { Month = "Jul", SalesValue = 35 }
-                    };
+                        public string Month { get; set; }
+                        public double SalesValue { get; set; }
+                    }
 
-                private string[] colors = new string[] { "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53" };
-                private int colorIndex = 0;
+                    public List<SalesInfo> Sales = new List<SalesInfo>
+                        {
+                        new SalesInfo { Month = "Jan", SalesValue = 40 },
+                        new SalesInfo { Month = "Feb", SalesValue = 20 },
+                        new SalesInfo { Month = "Mar", SalesValue = 26 },
+                        new SalesInfo { Month = "Apr", SalesValue = 20 },
+                        new SalesInfo { Month = "May", SalesValue = 40 },
+                        new SalesInfo { Month = "Jun", SalesValue = 32 },
+                        new SalesInfo { Month = "Jul", SalesValue = 35 }
+                        };
 
-                public void PointRenderEvent(PointRenderEventArgs args)
-                {
-                    args.Fill = colors[colorIndex % colors.Length];
-                    colorIndex++;
+                    private string[] colors = new string[] { "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53", "#83a0cf", "#6FAAB0", "#7dba53" };
+                    private int colorIndex = 0;
+
+                    public void PointRenderEvent(PointRenderEventArgs args)
+                    {
+                        args.Fill = colors[colorIndex % colors.Length];
+                        colorIndex++;
+                    }
                 }
-            }
 
     </div>
 </div>
-<br />
-<style>
-    .e-dashboardlayout {
-        padding: 10px;
-    }
 
-        .e-dashboardlayout.e-control .e-panel:hover span {
-            display: block;
-        }
 
-        .e-dashboardlayout .e-panel .e-panel-container .text-align {
-            vertical-align: middle;
-            font-weight: 600;
-            font-size: 20px;
-            text-align: center;
-        }
 
-    .e-template-icon {
-        padding: 10px;
-        float: right;
-        display: none;
-    }
 
-    .text-align {
-        line-height: 160px;
-    }
-
-    .sb-demo-section .container-fluid {
-        background: #E5E5E5;
-    }
-
-    .ulstyle {
-        margin: 0px;
-        padding-left: 20px;
-        display: inline-block;
-    }
-
-    .list {
-        float: left;
-        line-height: 20px;
-        margin: 10px;
-        min-width: 350px;
-    }
-</style>
+<!-- General Code for this Site-->
 @code {
     SfDashboardLayout? dashboardObject;
     public int Count = 9;
