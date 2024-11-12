@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
+using MySql.Data.MySqlClient;
+using System.Data;
 using DataAccess.Models;
 
 namespace DataAccess.Services
@@ -17,11 +16,13 @@ namespace DataAccess.Services
 
         public async Task<IEnumerable<Collaborator>> GetCollaboratorsAsync()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 var query = "SELECT * FROM collaborator";
                 return await connection.QueryAsync<Collaborator>(query);
             }
         }
+
+        // Weitere Methoden für Insert, Update, Delete usw.
     }
 }

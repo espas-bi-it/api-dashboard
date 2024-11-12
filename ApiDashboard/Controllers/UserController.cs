@@ -42,7 +42,7 @@ public static class UserController
         }
     }
 
-    private static async Task<IResult> InsertUser(UserModel user, IUserData data)
+    private static async Task<IResult> InsertUser(User user, IUserData data)
     {
         try
         {
@@ -56,7 +56,7 @@ public static class UserController
     }
 
 
-    private static async Task<IResult> UpdateUser(UserModel user, IUserData data)
+    private static async Task<IResult> UpdateUser(User user, IUserData data)
     {
 
         try

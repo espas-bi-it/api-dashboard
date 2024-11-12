@@ -9,11 +9,35 @@
 @using Syncfusion.Blazor.Charts
 @using Syncfusion.Blazor.Navigations
 @using Syncfusion.XlsIO
+@using DataAccess.Models
 @inject NavigationManager NavigationManager
 @inject UserService UserService
 @inject CollaboratorService CollaboratorService
 <PageTitle>Api Dashboard</PageTitle>
+
 <h2>Api Dashboard</h2>
+<style>
+    body {
+        background-color: #f2f2f2;
+    }
+
+    /* Hintergrundfarbe für die Header aller Panels */
+    .dashboard-panel-header {
+        background-color: #87c85a;
+        color: #ffffff; /* Optional: Textfarbe für bessere Lesbarkeit */
+    }
+
+    /* Hintergrundfarbe für die Tabelle */
+    .sf-grid {
+        background-color: #9c9e9f;
+    }
+
+        /* Optional: Anpassung der Header-Zellen in der Tabelle */
+        .sf-grid .e-headercell {
+            background-color: #87c85a;
+            color: #ffffff; /* Optional: Textfarbe für bessere Lesbarkeit */
+        }
+</style>
 <div id="control-region">
     <div class="control-section" id="target">
         <div style="padding:5px;text-align:right;">
@@ -148,7 +172,7 @@
         </SfDashboardLayout>
 
             @code {
-                private IEnumerable<UserModel> Users;
+                private IEnumerable<User> Users;
 
              
                     public class SalesInfo
