@@ -293,4 +293,81 @@ Beispiel:
 ```
 
 Speichern nicht vergessen :-)
+
+
+###Option 2 mit phpmyadmin
+
+1. XAMPP herunterladen (falls noch nicht gemacht)
+2. Diens im MySQL im Control panel starten
+3. Zur Seite localhost/phpmyadmin navigieren
+4. Unter dem Tab "SQL" folgendes Skript einfügen.
+
+```
+-- Datenbank erstellen
+CREATE DATABASE ApiDashboard;
+
+-- Datenbank verwenden
+USE ApiDashboard;
+
+-- Tabelle User erstellen
+CREATE TABLE User (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    FirstName VARCHAR(50) NOT NULL, 
+    LastName VARCHAR(50) NOT NULL
+);
+
+-- Tabelle collaborator erstellen
+CREATE TABLE collaborator (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    FirstName VARCHAR(50) NOT NULL, 
+    LastName VARCHAR(50) NOT NULL,
+    TeamRole VARCHAR(50) NOT NULL
+);
+
+-- Prozedur spUser_Delete erstellen
+DELIMITER //
+CREATE PROCEDURE spUser_Delete(IN Id INT)
+BEGIN
+    DELETE FROM User WHERE Id = Id;
+END //
+DELIMITER ;
+
+-- Prozedur spUser_Get erstellen
+DELIMITER //
+CREATE PROCEDURE spUser_Get(IN Id INT)
+BEGIN
+    SELECT Id, FirstName, LastName FROM User WHERE Id = Id;
+END //
+DELIMITER ;
+
+-- Prozedur spUser_GetAll erstellen
+DELIMITER //
+CREATE PROCEDURE spUser_GetAll()
+BEGIN
+    SELECT Id, FirstName, LastName FROM User;
+END //
+DELIMITER ;
+
+-- Prozedur spUser_Insert erstellen
+DELIMITER //
+CREATE PROCEDURE spUser_Insert(IN FirstName VARCHAR(50), IN LastName VARCHAR(50))
+BEGIN
+    INSERT INTO User (FirstName, LastName) VALUES (FirstName, LastName);
+END //
+DELIMITER ;
+
+-- Prozedur spUser_Update erstellen
+DELIMITER //
+CREATE PROCEDURE spUser_Update(IN Id INT, IN FirstName VARCHAR(50), IN LastName VARCHAR(50))
+BEGIN
+    UPDATE User SET FirstName = FirstName, LastName = LastName WHERE Id = Id;
+END //
+DELIMITER ;
+
+-- Daten in die Tabelle User einfügen
+INSERT INTO User (FirstName, LastName) VALUES ('John', 'Doe'), ('Jane', 'Smith');
+
+-- Daten in die Tabelle collaborator einfügen
+INSERT INTO collaborator (FirstName, LastName, TeamRole) VALUES ('Alice', 'Johnson', 'Developer'), ('Bob', 'Brown', 'Manager');
+```
 	
