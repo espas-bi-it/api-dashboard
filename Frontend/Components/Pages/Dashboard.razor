@@ -36,36 +36,9 @@
                         </SfChart>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="two" Row="0" Column="1" SizeX=2 SizeY=2>
-                    <HeaderTemplate>Panel 2</HeaderTemplate>
-                    <ContentTemplate>
+            
+              
 
-                        <div class="col-lg-12 control-section">
-                            <div class="content-wrapper">
-                                <div class="row">
-                                    <SfGrid DataSource="@GridData" AllowFiltering="true" AllowPaging="true">
-                                        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
-                                        <GridPageSettings PageCount="3" PageSize="18"></GridPageSettings>
-                                        <GridColumns>
-                                            <GridColumn Field=@nameof(Collaborator.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
-                                            <GridColumn Field=@nameof(Collaborator.FirstName) HeaderText="First Name" Width="150"></GridColumn>
-                                            <GridColumn Field=@nameof(Collaborator.LastName) HeaderText="Last Name" Width="150"></GridColumn>
-                                            <GridColumn Field=@nameof(Collaborator.TeamRole) HeaderText="Team Role" Width="150"></GridColumn>
-                                        </GridColumns>
-                                    </SfGrid>
-                                </div>
-                            </div>
-                        </div>
-                    </ContentTemplate>
-                </DashboardLayoutPanel>
-                @code {
-                    public List<Collaborator> GridData { get; set; }
-
-                    protected override async Task OnInitializedAsync()
-                    {
-                        GridData = (await OrderService.GetCollaboratorsAsync()).ToList();
-                    }
-                            }
                 <DashboardLayoutPanel Id="three" Row="1" Column="0" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 3</HeaderTemplate>
                     <ContentTemplate>
@@ -83,12 +56,7 @@
                         </SfChart>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="four" Row="0" Column="3" SizeX=2 SizeY=2>
-                    <HeaderTemplate>Panel 4</HeaderTemplate>
-                    <ContentTemplate>
-                        <h2>Panel 4</h2>
-                    </ContentTemplate>
-                </DashboardLayoutPanel>
+            
                 <DashboardLayoutPanel Id="five" Row="1" Column="1" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 5</HeaderTemplate>
                     <ContentTemplate>
@@ -122,106 +90,60 @@
                          }
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="six" Row="1" Column="2" SizeX="2" SizeY="2">
-                    <HeaderTemplate>Panel 6</HeaderTemplate>
+           
+                <DashboardLayoutPanel Id="seven" Row="0" Column="0" SizeX="3" SizeY="3">
+                    <HeaderTemplate>Team Members (Panel 7)</HeaderTemplate>
                     <ContentTemplate>
-                        <div class="control-section" align='center'>
-                            <SfChart Title="Stock Price Analysis" Width="@Width">
-                                <ChartArea>
-                                    <ChartAreaBorder Width="0"></ChartAreaBorder>
-                                </ChartArea>
-                                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.DateTime" EdgeLabelPlacement="EdgeLabelPlacement.Shift">
-                                    <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
-                                </ChartPrimaryXAxis>
-                                <ChartPrimaryYAxis Title="Price" LabelFormat="${value}" RangePadding="ChartRangePadding.None">
-                                    <ChartAxisLineStyle Width="0"></ChartAxisLineStyle>
-                                    <ChartAxisMajorTickLines Width="0"></ChartAxisMajorTickLines>
-                                    <ChartAxisMinorTickLines Width="0"></ChartAxisMinorTickLines>
-                                </ChartPrimaryYAxis>
-                                <ChartSeriesCollection>
-                                    <ChartSeries Type="ChartSeriesType.Line" DataSource="@ChartPointsX" XName="Period" YName="StockPrice" Width="2" Name="Product X">
-                                    </ChartSeries>
-                                    <ChartSeries Type="ChartSeriesType.Line" DataSource="@ChartPointsY" XName="Period" YName="StockPrice" Width="2" Name="Product Y">
-                                    </ChartSeries>
-                                </ChartSeriesCollection>
-                                <ChartCrosshairSettings Enable="true" LineType="LineType.Vertical">
-                                    <ChartCrosshairLine Color="rgba(204,214,235,0.25)" Width="20"></ChartCrosshairLine>
-                                </ChartCrosshairSettings>
-                                <ChartTooltipSettings Enable="true" Shared="true"></ChartTooltipSettings>
-                                <ChartLegendSettings EnableHighlight="true"></ChartLegendSettings>
-                            </SfChart>
-                        </div>
-                        @code {
-                            private Random randomNum = new Random();
-                            public string Width
-                            {
-                                get;
-                                set;
-                            } = "90%";
-                            private double stockPriceX = 80,
-                            stockPriceY = 90;
-                            public List<LineChartData> ChartPointsX
-                            {
-                                get;
-                                set;
-                            } = new List<LineChartData>();
-                            public List<LineChartData> ChartPointsY
-                            {
-                                get;
-                                set;
-                            } = new List<LineChartData>();
-                            protected override void OnInitialized()
-                            {
-                                GetChartPoints();
-                            }
-                            private void GetChartPoints()
-                            {
-                                for (int i = 1; i < 500; i++)
-                                {
-                                    if (randomNum.NextDouble() > 0.5)
-                                    {
-                                                stockPriceX += randomNum.NextDouble();
-                                                stockPriceY += randomNum.NextDouble();
-                                    }
-                                    else
-                                    {
-                                                stockPriceX -= randomNum.NextDouble();
-                                                stockPriceY -= randomNum.NextDouble();
-                                    }
-                                    ChartPointsX.Add(new LineChartData
-                                    {
-                                        Period = new DateTime(1960, 1, 1).AddMonths(i + 1).AddDays(i),
-                                        StockPrice = Math.Round(stockPriceX)
-                                    });
-                                    ChartPointsY.Add(new LineChartData
-                                    {
-                                        Period = new DateTime(1960, 1, 1).AddMonths(i + 1).AddDays(i),
-                                        StockPrice = Math.Round(stockPriceY)
-                                    });
-                                }
-                            }
-                            public class LineChartData
-                            {
-                                public DateTime Period
-                                {
-                                    get;
-                                    set;
-                                }
-                                public double StockPrice
-                                {
-                                    get;
-                                    set;
-                                }
-                            }
-                        }
+                        <SfGrid ID="Grid" DataSource="@Orders" @ref="Grid" AllowPaging="true" AllowFiltering="true" AllowReordering="true" AllowResizing="true" AllowGrouping="true" AllowExcelExport="true" AllowSelection="true"
+                                AllowSorting="true" Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Cancel", "Update", "ExcelExport", "Search" })" Height="100%" Width="100%">
+                            <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true" Mode="Syncfusion.Blazor.Grids.EditMode.Normal"></GridEditSettings>
+                            <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.FilterBar"></GridFilterSettings>
+                            <GridPageSettings PageSize="20" PageSizes="true"></GridPageSettings>
+                            <GridSelectionSettings Type="Syncfusion.Blazor.Grids.SelectionType.Multiple"></GridSelectionSettings>
+                            <GridEvents OnToolbarClick="ToolbarClick" TValue="Order"></GridEvents>
+                            <GridColumns>
+                                <GridColumn Type="Syncfusion.Blazor.Grids.ColumnType.CheckBox" Width="50"></GridColumn>
+                                <GridColumn Field="@nameof(Order.OrderID)" HeaderText="Order ID" IsPrimaryKey="true" ValidationRules="@(new ValidationRules { Required = true })" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="120"></GridColumn>
+                                <GridColumn Field="@nameof(Order.CustomerID)" HeaderText="Customer Name" ValidationRules="@(new ValidationRules { Required = true })" Width="120"></GridColumn>
+                                <GridColumn Field="@nameof(Order.OrderDate)" HeaderText="Order Date" EditType="EditType.DatePickerEdit" Format="d" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="130" Type="Syncfusion.Blazor.Grids.ColumnType.Date"></GridColumn>
+                                <GridColumn Field="@nameof(Order.Freight)" HeaderText="Freight" Format="C2" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" EditType="EditType.NumericEdit" Width="120"></GridColumn>
+                                <GridColumn Field="@nameof(Order.ShipCountry)" HeaderText="Ship Country" EditType="EditType.DropDownEdit" Width="150"></GridColumn>
+                            </GridColumns>
+                        </SfGrid>
                     </ContentTemplate>
                 </DashboardLayoutPanel>
-                <DashboardLayoutPanel Id="seven" Row="1" Column="4" SizeX=1 SizeY=1>
-                    <HeaderTemplate>Panel 7</HeaderTemplate>
-                    <ContentTemplate>
-                        <h2>Panel 7</h2>
-                    </ContentTemplate>
-                </DashboardLayoutPanel>
+
+                @code {
+        public List<Order>? Orders { get; set; }
+        SfGrid<Order>? Grid;
+        protected override void OnInitialized()
+        {
+            Orders = Enumerable.Range(1, 75).Select(x => new Order()
+            {
+                OrderID = 1000 + x,
+                CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
+                Freight = 2.1 * x,
+                OrderDate = DateTime.Now.AddDays(-x),
+                ShipCountry = (new string[] { "USA", "UK", "CHINA", "RUSSIA", "INDIA" })[new Random().Next(5)]
+            }).ToList();
+        }
+        public void ToolbarClick(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+        {
+            if (args.Item.Id == "Grid_excelexport")
+            {
+                    this.Grid?.ExportToExcelAsync();
+            }
+        }
+        public class Order
+        {
+            public int? OrderID { get; set; }
+            public string? CustomerID { get; set; }
+            public DateTime? OrderDate { get; set; }
+            public double? Freight { get; set; }
+            public string? ShipCountry { get; set; }
+        }
+                }
+
                 <DashboardLayoutPanel Id="eight" Row="0" Column="3" SizeX=1 SizeY=1>
                     <HeaderTemplate>Panel 8</HeaderTemplate>
                     <ContentTemplate>
