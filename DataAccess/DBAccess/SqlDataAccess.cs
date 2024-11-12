@@ -8,10 +8,16 @@ namespace DataAccess.DBAccess;
 public class SqlDataAccess : ISqlDataAccess
 {
     private readonly IConfiguration _config;
+    private string? connectionString;
 
     public SqlDataAccess(IConfiguration config)
     {
         _config = config;
+    }
+
+    public SqlDataAccess(string? connectionString)
+    {
+        this.connectionString = connectionString;
     }
 
     public async Task<IEnumerable<T>> LoadData<T, U>(

@@ -1,29 +1,24 @@
-﻿using System.Data.SqlClient;
-using Dapper;
+﻿using Dapper;
+using MySql.Data.MySqlClient;
+using System.Data;
 using DataAccess.Models;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace DataAccess.Services
+public class UserService
 {
-    public class UserService
+    private readonly string _connectionString;
+
+    public UserService(string connectionString)
     {
-        private readonly IConfiguration _configuration;
+        _connectionString = connectionString;
+    }
 
-        public UserService(IConfiguration configuration)
+    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    {
+        using (IDbConnection db = new MySqlConnection(_connectionString))
         {
-            _configuration = configuration;
-        }
-
-        public async Task<IEnumerable<UserModel>> GetUsersAsync()
-        {
-            var connectionString = _configuration.GetConnectionString("Default");
-            using (var connection = new SqlConnection(connectionString))
-            {
-                var query = "SELECT Id, FirstName, LastName FROM [dbo].[user]";
-                return await connection.QueryAsync<UserModel>(query);
-            }
+            return await db.QueryAsync<User>("SELECT * FROM User");
         }
     }
+
+    // Weitere Methoden für Insert, Update, Delete usw.
 }
