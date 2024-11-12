@@ -295,7 +295,7 @@ Beispiel:
 Speichern nicht vergessen :-)
 
 
-###Option 2 mit phpmyadmin
+### Option 2 mit phpmyadmin
 
 1. XAMPP herunterladen (falls noch nicht gemacht)
 2. Diens im MySQL im Control panel starten
