@@ -1,10 +1,12 @@
 using Frontend.Components;
+using Radzen; // Import the Radzen namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddScoped<TooltipService>(); // Register TooltipService
 
 var app = builder.Build();
 
