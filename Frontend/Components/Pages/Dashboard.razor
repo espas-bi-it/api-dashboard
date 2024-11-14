@@ -1,0 +1,29 @@
+﻿@page "/dashboard"
+
+<PageTitle>Dashboard</PageTitle>
+
+<h3>Api Dashboard</h3>
+
+
+<RadzenDataGrid Data="@orders" TItem="Order" AllowPaging="true" PageSize="10">
+    <Columns>
+        <RadzenDataGridColumn TItem="Order" Property="OrderID" Title="Order ID" />
+        <RadzenDataGridColumn TItem="Order" Property="CustomerName" Title="Customer Name" />
+        <RadzenDataGridColumn TItem="Order" Property="OrderDate" Title="Order Date" FormatString="{0:MM/dd/yyyy}" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    List<Order> orders = new List<Order>
+    {
+        new Order { OrderID = 1, CustomerName = "John Doe", OrderDate = DateTime.Now },
+        new Order { OrderID = 2, CustomerName = "Jane Smith", OrderDate = DateTime.Now.AddDays(-1) }
+    };
+
+    public class Order
+    {
+        public int OrderID { get; set; }
+        public string CustomerName { get; set; }
+        public DateTime OrderDate { get; set; }
+    }
+}
