@@ -1,7 +1,18 @@
 ﻿@page "/dashboard"
 
+
 <PageTitle>Dashboard</PageTitle>
 
+@inject UserService UserService
+
+@code {
+    private IEnumerable<DataAccess.Models.User> teamMembers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        teamMembers = await UserService.GetUsersAsync();
+    }
+}
 
 <div class="container-fluid">
 
@@ -90,25 +101,28 @@
         </div>
     </div>
 
-    <div class="section pt-4">
-        <RadzenCard>
-            <div class="rounded p-4">
-
-                <div class="d-flex align-items-center justify-content-between mb-4">
-
-                    <h6 class="mb-0">Recent Sales</h6>
-                    <a href="">Show All</a>
+    <div class="container-fluid">
+        <div class="section pt-4">
+            <RadzenCard>
+                <div class="rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Team Members</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <RadzenDataGrid Data="@teamMembers" TItem="DataAccess.Models.User" AllowPaging="true" PageSize="10">
+                        <Columns>
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="Id" Title="ID" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="FirstName" Title="First Name" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="LastName" Title="Last Name" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="TeamRole" Title="Team Role" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="Website" Title="Website" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="SiteViews" Title="Site Views" />
+                            <RadzenDataGridColumn TItem="DataAccess.Models.User" Property="CreatedAt" Title="Created At" FormatString="{0:MM/dd/yyyy}" />
+                        </Columns>
+                    </RadzenDataGrid>
                 </div>
-                <RadzenDataGrid Data="@orders" TItem="Order" AllowPaging="true" PageSize="10">
-                    <Columns>
-                        <RadzenDataGridColumn TItem="Order" Property="OrderID" Title="Order ID" />
-                        <RadzenDataGridColumn TItem="Order" Property="CustomerName" Title="Customer Name" />
-                        <RadzenDataGridColumn TItem="Order" Property="OrderDate" Title="Order Date" FormatString="{0:MM/dd/yyyy}" />
-                    </Columns>
-                </RadzenDataGrid>
-
-            </div>
-        </RadzenCard>
+            </RadzenCard>
+        </div>
     </div>
 
     <div class="section pt-4">
@@ -194,22 +208,3 @@
   }
 
 
-<!-- Code for members-->
-@code {
-    List<Order> orders = new List<Order>
-    {
-        new Order { OrderID = 1, CustomerName = "William Does", OrderDate = DateTime.Now },
-        new Order { OrderID = 1, CustomerName = "John Musk", OrderDate = DateTime.Now },
-        new Order { OrderID = 1, CustomerName = "John Doe", OrderDate = DateTime.Now },
-        new Order { OrderID = 1, CustomerName = "Peter Doe", OrderDate = DateTime.Now },
-        new Order { OrderID = 1, CustomerName = "John Doe", OrderDate = DateTime.Now },
-        new Order { OrderID = 2, CustomerName = "Jane Smith", OrderDate = DateTime.Now.AddDays(-1) }
-    };
-
-    public class Order
-    {
-        public int OrderID { get; set; }
-        public string CustomerName { get; set; }
-        public DateTime OrderDate { get; set; }
-    }
-}
