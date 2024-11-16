@@ -16,21 +16,21 @@ public class UserData : IUserData
         _db = db;
     }
 
-    public Task<IEnumerable<User>> GetUsers() =>
-        _db.LoadData<User, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
+    public Task<IEnumerable<TeamMembers>> GetUsers() =>
+        _db.LoadData<TeamMembers, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
 
-    public async Task<User?> GetUser(int id)
+    public async Task<TeamMembers?> GetUser(int id)
     {
-        var results = await _db.LoadData<User, dynamic>(
+        var results = await _db.LoadData<TeamMembers, dynamic>(
             storedProcedure: "dbo.spUser_Get",
             new { Id = id });
         return results.FirstOrDefault();
     }
 
-    public Task InsertUser(User user) =>
+    public Task InsertUser(TeamMembers user) =>
        _db.SaveData(storedProcedure: "dbo.spUser_Insert", new { user.FirstName, user.LastName });
 
-    public Task UpdateUser(User user) =>
+    public Task UpdateUser(TeamMembers user) =>
         _db.SaveData(storedProcedure: "dbo.spUser_Update", user);
 
     public Task DeleteUser(int id) =>

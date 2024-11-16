@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Models
 {
-    public class User
+    public class TeamMembers
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -11,7 +11,7 @@
         public DateTime CreatedAt { get; set; }
 
         // Konstruktor, der das Erstellungsdatum auf das aktuelle Datum setzt
-        public User()
+        public TeamMembers()
         {
             CreatedAt = DateTime.Now.Date; // Nur das Datum ohne Uhrzeit
         }
