@@ -41,11 +41,28 @@
             <RadzenText Text="Api Dashboard" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-sidebar-color);" />
         </RadzenStack>
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Home" Path="" />
+            <RadzenPanelMenuItem Path="/">
+                <Template>
+                    <div class="d-flex align-items-center">
+                        <RadzenIcon Icon="home" Style="margin-right: 10px; width: 24px; height: 24px; font-size: 24px; color: var(--rz-text-title-color);" />
+                        <span>Home</span>
+                    </div>
+                </Template>
+            </RadzenPanelMenuItem>
         </RadzenPanelMenu>
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Api Dashboard" Path="/dashboard" />
+            <RadzenPanelMenuItem Path="/dashboard">
+                <Template>
+                    <div class="d-flex align-items-center">
+                        <RadzenIcon Icon="smart_button" Style="margin-right: 10px; width: 24px; height: 24px; font-size: 24px; color: var(--rz-text-title-color);" />
+                        <span>Api Dashboard</span>
+                    </div>
+                </Template>
+            </RadzenPanelMenuItem>
         </RadzenPanelMenu>
+
+
+
         <RadzenStack AlignItems="Radzen.AlignItems.Center" Gap="0" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding);">
             <RadzenText Text="Api Dashboard v1.0.0" TextStyle="Radzen.Blazor.TextStyle.Caption" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
             <RadzenText Text="Copyright Ⓒ 2024" TextStyle="Radzen.Blazor.TextStyle.Caption" class="rz-mb-0" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
