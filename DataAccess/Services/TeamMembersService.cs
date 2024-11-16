@@ -8,11 +8,11 @@ using DataAccess.Models;
 
 namespace Services // Stelle sicher, dass der Namespace korrekt ist
 {
-    public class UserService
+    public class TeamMembersService
     {
         private readonly IConfiguration _configuration;
 
-        public UserService(IConfiguration configuration)
+        public TeamMembersService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -22,12 +22,12 @@ namespace Services // Stelle sicher, dass der Namespace korrekt ist
             return new MySqlConnection(_configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync()
+        public async Task<IEnumerable<TeamMembers>> GetUsersAsync()
         {
             using (var connection = CreateConnection())
             {
                 string sql = "SELECT * FROM user";
-                return await connection.QueryAsync<User>(sql);
+                return await connection.QueryAsync<TeamMembers>(sql);
             }
         }
     }

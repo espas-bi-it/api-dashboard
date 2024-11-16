@@ -5,9 +5,9 @@ namespace DataAccess.Data
     public interface IUserData
     {
         Task DeleteUser(int id);
-        Task<User?> GetUser(int id);
-        Task<IEnumerable<User>> GetUsers();
-        Task InsertUser(User user);
-        Task UpdateUser(User user);
+        Task<TeamMembers?> GetUser(int id);
+        Task<IEnumerable<TeamMembers>> GetUsers();
+        Task InsertUser(TeamMembers user);
+        Task UpdateUser(TeamMembers user);
     }
 }
